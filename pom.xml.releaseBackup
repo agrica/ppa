@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="ISO-8859-15" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Identification du projet -->
+    <groupId>com.agrica.socle.ppa</groupId>
+    <artifactId>ppa</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>POM Parent Agrica</name>
+
+    <organization>
+        <name>Agrica</name>
+        <url>https://www.groupagrica.com/</url>
+    </organization>
+
+    <inceptionYear>2016</inceptionYear>
+
+    <!-- pre-requis -->
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
+
+    <!-- Elements pour le deploiement dans les repositories Generali -->
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Release Repository</name>
+            <url>${dist.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshots Repository</name>
+            <url>${dist.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!-- A redefinir pour chaque projet -->
+    <scm>
+        <connection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</connection>
+        <developerConnection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</developerConnection>
+        <url>http://gitlab-dei/socle/ppa</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>
+    </ciManagement>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>${usine.url.bugtracker.jira}/PPG</url>
+    </issueManagement>
+
+    <!-- A redefinir au besoin par les projets -->
+    <properties>
+        <!-- L'encoding des sources -->
+        <source.encoding>UTF-8</source.encoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+        <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+
+        <!-- La version de maven -->
+        <maven.version>3.3.9</maven.version>
+        <!-- Le niveau de compatibilite des sources du projet -->
+        <compile.source>1.8</compile.source>
+        <!-- Le niveau de compatibilite des binaires du projet -->
+        <compile.target>1.8</compile.target>
+        <!-- Les options a passer a la commande forkee de maven pour les tests -->
+        <surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>
+
+        <!-- ================================= -->
+        <!-- Usine                             -->
+        <!-- ================================= -->
+
+        <!-- Les URLs pour le déploiement des artifacts -->
+        <dist.snapshots.url>http://nexus/content/repositories/snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus/content/repositories/releases/</dist.releases.url>
+
+        <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
+        <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
+        <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
+        <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
+        <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
+        <usine.url.sonar>http://sonar</usine.url.sonar>
+
+        <!-- ================================= -->
+        <!-- Parametrage buildnumber           -->
+        <!-- ================================= -->
+        <buildnumber.revisionOnScmFailure>0</buildnumber.revisionOnScmFailure>
+        <buildnumber.doCheck>false</buildnumber.doCheck>
+        <buildnumber.doUpdate>false</buildnumber.doUpdate>
+
+
+        <!-- ================================= -->
+        <!-- Les versions de Plugins Maven -->
+        <!-- ================================= -->
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+
+        <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
+        <iterator-maven-plugin.version>0.4</iterator-maven-plugin.version>
+
+        <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+        <!-- Sonar -->
+        <sonar-maven-plugin.version>3.0.2</sonar-maven-plugin.version>
+        <sonar-mariadb-java-client.version>1.4.6</sonar-mariadb-java-client.version>
+        <!-- SCM tools -->
+
+        <maven-scm-provider-svnjava.version>2.1.1</maven-scm-provider-svnjava.version>
+        <maven.svnkit.version>1.7.11</maven.svnkit.version>
+
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
+            <plugins>
+                <!-- ************************* -->
+                <!-- Tools                     -->
+                <!-- ************************ -->
+                <!-- Release -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                    <configuration>
+                        <!-- During release:perform, enable the "release" profile -->
+                        <releaseProfiles>release</releaseProfiles>
+                    </configuration>
+                </plugin>
+                <!-- Assembly -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                    <configuration>
+                        <appendAssemblyId>true</appendAssemblyId>
+                        <tarLongFileMode>gnu</tarLongFileMode>
+                    </configuration>
+                </plugin>
+                <!-- Iterator -->
+                <plugin>
+                    <groupId>com.soebes.maven.plugins</groupId>
+                    <artifactId>iterator-maven-plugin</artifactId>
+                    <version>${iterator-maven-plugin.version}</version>
+                </plugin>
+                <!-- Buildnumber -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>${buildnumber-maven-plugin.version}</version>
+                    <configuration>
+                        <revisionOnScmFailure>${buildnumber.revisionOnScmFailure}</revisionOnScmFailure>
+                        <doCheck>${buildnumber.doCheck}</doCheck>
+                        <doUpdate>${buildnumber.doUpdate}</doUpdate>
+                    </configuration>
+                </plugin>
+
+                <!-- ************************* -->
+                <!-- Plugins pour Sonar        -->
+                <!-- ************************ -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.mariadb.jdbc</groupId>
+                            <artifactId>mariadb-java-client</artifactId>
+                            <version>${sonar-mariadb-java-client.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Build Number -->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>buildnumber-maven-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>validate</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>create</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+
+    </build>
+
+    <profiles>
+        <profile>
+            <id>code-check</id>
+            <properties>
+                <sonar.analysis.mode>incremental</sonar.analysis.mode>
+                <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
+                <sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
+            </properties>
+            <build>
+                <defaultGoal>sonar:sonar</defaultGoal>
+            </build>
+        </profile>
+
+        <!-- GIT Build Number -->
+        <profile>
+            <id>git-scm</id>
+            <activation>
+                <file>
+                    <exists>.git</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <configuration>
+                            <shortRevisionLength>6</shortRevisionLength>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- SVN Build Number -->
+        <profile>
+            <id>svn-scm</id>
+            <activation>
+                <file>
+                    <exists>.svn</exists>
+                </file>
+            </activation>
+            <properties>
+                <buildnumber.provider.svn>javasvn</buildnumber.provider.svn>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <configuration>
+                            <providerImplementations>
+                                <svn>${buildnumber.provider.svn}</svn>
+                            </providerImplementations>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.google.code.maven-scm-provider-svnjava</groupId>
+                                <artifactId>maven-scm-provider-svnjava</artifactId>
+                                <version>${maven-scm-provider-svnjava.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.tmatesoft.svnkit</groupId>
+                                <artifactId>svnkit</artifactId>
+                                <version>1.7.11</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+</project>
+	
