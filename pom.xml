@@ -45,10 +45,10 @@
         <tag>HEAD</tag>
     </scm>
 
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>
-    </ciManagement>
+    <!--<ciManagement>-->
+        <!--<system>Jenkins</system>-->
+        <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
+    <!--</ciManagement>-->
 
     <issueManagement>
         <system>JIRA</system>
