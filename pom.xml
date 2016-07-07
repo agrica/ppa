@@ -41,7 +41,7 @@
     <scm>
         <connection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</developerConnection>
-        <url>http://gitlab-dei/socle/ppa</url>
+        <url>http://gitlab-dei/socle/ppa/tree/master</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -78,7 +78,7 @@
         <!-- Usine                             -->
         <!-- ================================= -->
 
-        <!-- Les URLs pour le déploiement des artifacts -->
+        <!-- Les URLs pour le dï¿½ploiement des artifacts -->
         <dist.snapshots.url>http://nexus/content/repositories/snapshots/</dist.snapshots.url>
         <dist.releases.url>http://nexus/content/repositories/releases/</dist.releases.url>
 
