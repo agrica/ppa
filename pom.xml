@@ -39,8 +39,8 @@
 
     <!-- A redefinir pour chaque projet -->
     <scm>
-        <connection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</connection>
-        <developerConnection>scm:git:ssh://git@gitlab-dei:socle/ppa.git</developerConnection>
+        <connection>scm:git:ssh://git@pgitunxweb01.agrica.loc:socle/ppa.git</connection>
+        <developerConnection>scm:git:ssh://git@pgitunxweb01.agrica.loc:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa/tree/master</url>
         <tag>HEAD</tag>
     </scm>
