@@ -78,6 +78,8 @@
         <!-- ================================= -->
         <!-- Usine                             -->
         <!-- ================================= -->
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss</maven.build.timestamp.format>
+        <build.date>${maven.build.timestamp}</build.date>
 
         <!-- Les URLs pour le d�ploiement des artifacts -->
         <dist.snapshots.url>http://nexus/content/repositories/snapshots/</dist.snapshots.url>
