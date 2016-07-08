@@ -74,7 +74,7 @@
         <!-- Le niveau de compatibilite des binaires du projet -->
         <compile.target>1.8</compile.target>
         <!-- Les options a passer a la commande forkee de maven pour les tests -->
-        <surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>
+        <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
 
         <!-- ================================= -->
         <!-- Usine                             -->
