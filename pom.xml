@@ -4,7 +4,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-M1</version>
 
     <packaging>pom</packaging>
 
@@ -47,7 +47,8 @@
         <connection>scm:git:git://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:git://gitlab-dei:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa/tree/master</url>
-    </scm>
+      <tag>ppa-0.0.1-M1</tag>
+  </scm>
 
     <!--<ciManagement>-->
         <!--<system>Jenkins</system>-->
