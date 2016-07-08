@@ -36,12 +36,11 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- A redefinir pour chaque projet -->
+    <!-- A redefinir pour chaque projet <tag>HEAD</tag> -->
     <scm>
-        <connection>scm:git:http://pgitunxweb01.agrica.loc/socle/ppa.git</connection>
+        <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:ssh://gitlab-dei:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa/tree/master</url>
-        <tag>HEAD</tag>
     </scm>
 
     <!--<ciManagement>-->
@@ -209,7 +208,7 @@
             </build>
         </profile>
 
-        <!-- GIT Build Number -->
+        <!-- GIT Build Number 
         <profile>
             <id>git-scm</id>
             <activation>
@@ -229,8 +228,8 @@
                 </plugins>
             </build>
         </profile>
-
-        <!-- SVN Build Number -->
+-->
+        <!-- SVN Build Number
         <profile>
             <id>svn-scm</id>
             <activation>
@@ -267,7 +266,7 @@
                 </plugins>
             </build>
         </profile>
-
+ -->
     </profiles>
 </project>
 	
