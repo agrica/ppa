@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.0.1-M1</version>
+    <version>0.0.1-M2-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -36,17 +37,18 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- A redefinir pour chaque projet -->
+
     <scm>
-        <connection>scm:git:http://pgitunxweb01.agrica.loc/socle/ppa.git</connection>
-        <developerConnection>scm:git:ssh://gitlab-dei:socle/ppa.git</developerConnection>
-        <url>http://gitlab-dei/socle/ppa/tree/master</url>
-        <tag>ppa-0.0.1-M1</tag>
+        <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
+        <developerConnection>scm:git:git@gitlab-dei:socle/ppa.git</developerConnection>
+        <url>http://gitlab-dei/socle/ppa</url>
+        <tag>HEAD</tag>
     </scm>
 
+
     <!--<ciManagement>-->
-        <!--<system>Jenkins</system>-->
-        <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
+    <!--<system>Jenkins</system>-->
+    <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
     <!--</ciManagement>-->
 
     <issueManagement>
@@ -181,16 +183,16 @@
         <plugins>
             <!-- Build Number -->
             <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>buildnumber-maven-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>validate</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>create</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>buildnumber-maven-plugin</artifactId>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>validate</phase>-->
+            <!--<goals>-->
+            <!--<goal>create</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
         </plugins>
 
@@ -209,7 +211,7 @@
             </build>
         </profile>
 
-        <!-- GIT Build Number -->
+        <!-- GIT Build Number 
         <profile>
             <id>git-scm</id>
             <activation>
@@ -229,8 +231,8 @@
                 </plugins>
             </build>
         </profile>
-
-        <!-- SVN Build Number -->
+-->
+        <!-- SVN Build Number
         <profile>
             <id>svn-scm</id>
             <activation>
@@ -267,7 +269,7 @@
                 </plugins>
             </build>
         </profile>
-
+ -->
     </profiles>
 </project>
 	
