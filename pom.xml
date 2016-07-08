@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
@@ -77,8 +78,8 @@
         <!-- ================================= -->
         <!-- Usine                             -->
         <!-- ================================= -->
-        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss</maven.build.timestamp.format>
-        <build.date>${maven.build.timestamp}</build.date>
+        <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
+        <!--<build.date>${maven.build.timestamp}</build.date>-->
 
         <!-- Les URLs pour le d�ploiement des artifacts -->
         <dist.snapshots.url>http://nexus/content/repositories/snapshots/</dist.snapshots.url>
@@ -106,6 +107,7 @@
 
         <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
         <iterator-maven-plugin.version>0.4</iterator-maven-plugin.version>
+        <build-helper-maven-plugin.version>1.11</build-helper-maven-plugin.version>
 
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
@@ -135,6 +137,12 @@
                         <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
                     </configuration>
+                </plugin>
+                <!-- Build Helper -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
                 </plugin>
                 <!-- Assembly -->
                 <plugin>
@@ -182,6 +190,27 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!-- Property Setter -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>build.time</name>
+                            <pattern>dd/MMM/yyyy HH:mm:ss</pattern>
+                            <locale>fr_FR</locale>
+                            <timeZone>CEST</timeZone>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Build Number -->
             <!--<plugin>-->
             <!--<groupId>org.codehaus.mojo</groupId>-->
