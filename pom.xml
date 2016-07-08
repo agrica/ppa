@@ -64,6 +64,8 @@
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss</maven.build.timestamp.format>
+        <build.date>${maven.build.timestamp}</build.date>
 
         <!-- La version de maven -->
         <maven.version>3.3.9</maven.version>
@@ -189,26 +191,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <!-- Property Setter -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.10</version>
-                <executions>
-                    <execution>
-                        <id>timestamp-property</id>
-                        <goals>
-                            <goal>timestamp-property</goal>
-                        </goals>
-                        <configuration>
-                            <name>build.time</name>
-                            <pattern>dd/MMM/yyyy HH:mm:ss</pattern>
-                            <locale>fr_FR</locale>
-                            <timeZone>CEST</timeZone>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- Build Number -->
             <!--<plugin>-->
@@ -228,17 +210,17 @@
     </build>
 
     <profiles>
-        <profile>
-            <id>code-check</id>
-            <properties>
-                <sonar.analysis.mode>incremental</sonar.analysis.mode>
-                <sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>
-                <sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>
-            </properties>
-            <build>
-                <defaultGoal>sonar:sonar</defaultGoal>
-            </build>
-        </profile>
+        <!--<profile>-->
+            <!--<id>code-check</id>-->
+            <!--<properties>-->
+                <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
+                <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
+                <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
+            <!--</properties>-->
+            <!--<build>-->
+                <!--<defaultGoal>sonar:sonar</defaultGoal>-->
+            <!--</build>-->
+        <!--</profile>-->
 
         <!-- GIT Build Number 
         <profile>
