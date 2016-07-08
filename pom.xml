@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
@@ -64,7 +65,7 @@
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss</maven.build.timestamp.format>
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
 
         <!-- La version de maven -->
@@ -210,16 +211,23 @@
     </build>
 
     <profiles>
-        <!--<profile>-->
-            <!--<id>code-check</id>-->
-            <!--<properties>-->
+        <profile>
+            <id>sonar</id>
+            <properties>
                 <!--<sonar.analysis.mode>incremental</sonar.analysis.mode>-->
                 <!--<sonar.issuesReport.html.enable>true</sonar.issuesReport.html.enable>-->
                 <!--<sonar.issuesReport.console.enable>true</sonar.issuesReport.console.enable>-->
-            <!--</properties>-->
-            <!--<build>-->
-                <!--<defaultGoal>sonar:sonar</defaultGoal>-->
-            <!--</build>-->
+            </properties>
+            <build>
+                <defaultGoal>sonar:sonar</defaultGoal>
+            </build>
+        </profile>
+
+        <!--<profile>-->
+        <!--<id>code-check</id>-->
+        <!--<build>-->
+        <!--<defaultGoal>sonar:sonar</defaultGoal>-->
+        <!--</build>-->
         <!--</profile>-->
 
         <!-- GIT Build Number 
