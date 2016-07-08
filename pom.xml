@@ -4,7 +4,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.0.1-M1</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -36,19 +36,21 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- A redefinir pour chaque projet <tag>HEAD</tag> 
+    <!-- A redefinir pour chaque projet <tag>HEAD</tag> --> 
     <scm>
         <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:ssh://gitlab-dei:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa/tree/master</url>
     </scm>
-	-->
+	
+	<!--
     <scm>
         <connection>scm:git:git://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:git://gitlab-dei:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa/tree/master</url>
-      <tag>ppa-0.0.1-M1</tag>
-  </scm>
+    </scm>
+	-->
+	<!-- ==> Unable to look up gitlab-dei:socle (port 9418) (Hôte inconnu. ) -->
 
     <!--<ciManagement>-->
         <!--<system>Jenkins</system>-->
