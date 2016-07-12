@@ -137,7 +137,7 @@
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
-                        <goals>sonar:sonar</goals>
+                        <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
                 <!-- Build Helper -->
