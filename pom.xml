@@ -58,7 +58,8 @@
     <!-- A redefinir au besoin par les projets -->
     <properties>
         <!-- L'encoding des sources -->
-        <source.encoding>UTF-8</source.encoding>
+        <!--<source.encoding>UTF-8</source.encoding>-->
+        <source.encoding>ISO-8859-15</source.encoding>
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
