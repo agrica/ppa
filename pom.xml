@@ -38,8 +38,8 @@
 
 
     <scm>
-        <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
-        <developerConnection>scm:git:git@gitlab-dei:socle/ppa.git</developerConnection>
+        <connection>scm:git:ssh://gitlab-dei/socle/ppa.git</connection>
+        <developerConnection>scm:git:git@gitlab-dei/socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa</url>
         <tag>HEAD</tag>
     </scm>
