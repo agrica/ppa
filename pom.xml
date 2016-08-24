@@ -106,6 +106,7 @@
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <versions-maven-plugin.version>2.3</versions-maven-plugin.version>
 
         <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
         <iterator-maven-plugin.version>0.4</iterator-maven-plugin.version>
@@ -140,6 +141,12 @@
                         <releaseProfiles>release</releaseProfiles>
                         <!--<goals>sonar:sonar</goals>-->
                     </configuration>
+                </plugin>
+                <!-- Version -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven-plugin.version}</version>
                 </plugin>
                 <!-- Build Helper -->
                 <plugin>
