@@ -105,7 +105,12 @@
         <!-- ================================= -->
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
+        <!-- Tools -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+
         <versions-maven-plugin.version>2.3</versions-maven-plugin.version>
 
         <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
@@ -141,6 +146,24 @@
                         <releaseProfiles>release</releaseProfiles>
                         <!--<goals>sonar:sonar</goals>-->
                     </configuration>
+                </plugin>
+                <!-- Deploy -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+                <!-- Javadoc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <!-- Javadoc -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
                 </plugin>
                 <!-- Version -->
                 <plugin>
