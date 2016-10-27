@@ -4,7 +4,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.5</version>
 
     <packaging>pom</packaging>
 
@@ -41,7 +41,7 @@
         <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa.git</developerConnection>
         <url>http://gitlab-dei/socle/ppa</url>
-        <tag>HEAD</tag>
+        <tag>ppa-0.0.5</tag>
     </scm>
 
 
