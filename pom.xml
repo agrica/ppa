@@ -84,9 +84,9 @@
         <!--<build.date>${maven.build.timestamp}</build.date>-->
 
         <!-- Les URLs pour le d�ploiement des artifacts -->
-        <dist.snapshots.url>http://nexus/content/repositories/snapshots/</dist.snapshots.url>
-        <dist.releases.url>http://nexus/content/repositories/releases/</dist.releases.url>
-
+        <dist.snapshots.url>http://nexus3/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus3/repository/maven-releases/</dist.releases.url>
+ 
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
         <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
         <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
