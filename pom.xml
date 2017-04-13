@@ -106,6 +106,7 @@
         <!-- Les versions de Plugins Maven -->
         <!-- ================================= -->
         <!-- Tools -->
+        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
@@ -113,6 +114,7 @@
 
         <versions-maven-plugin.version>2.3</versions-maven-plugin.version>
 
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
         <iterator-maven-plugin.version>0.4</iterator-maven-plugin.version>
         <build-helper-maven-plugin.version>1.12</build-helper-maven-plugin.version> <!-- 1.11 -->
@@ -243,8 +245,13 @@
                         <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
                         <versionTagPrefix>version-</versionTagPrefix>
                     </flowInitContext>
-                    <!--<username>USERNAME_FOR_A_GIT_USER</username>-->
+                    <enableSshAgent>true</enableSshAgent>
+                    <!-- Whether to automatically assign submodules the parent version. If set to false, the user will be prompted for the version of each submodules. -->
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <!--<username>t_int_cont</username>-->
                     <!--<password>PASSWORD_FOR_A_GIT_USER</password>-->
+
+                    <!-- Whether to turn off maven deployment. If false the "deploy" goal is called. If true the "install" goal is called -->
                     <noDeploy>true</noDeploy>
                     <squash>true</squash>
                     <scmCommentPrefix>[RELEASE] </scmCommentPrefix>
@@ -269,6 +276,8 @@
     </build>
 
     <profiles>
+
+        <!-- Sonar -->
         <profile>
             <id>sonar</id>
             <properties>
@@ -282,6 +291,62 @@
                     <plugin>
                         <groupId>org.sonarsource.scanner.maven</groupId>
                         <artifactId>sonar-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+
+        <!-- Npm Install -->
+        <profile>
+            <id>npm-install</id>
+            <activation>
+                <file>
+                    <exists>${project.basedir}/package.json</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
+                            <workingDirectory>${project.basedir}</workingDirectory>
+                        </configuration>
+                    </plugin>
+                    <!-- Clean node module -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>node_modules</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
