@@ -303,7 +303,7 @@
             <id>npm-install</id>
             <activation>
                 <file>
-                    <exists>${project.basedir}/package.json</exists>
+                    <exists>package.json</exists>
                 </file>
             </activation>
             <build>
