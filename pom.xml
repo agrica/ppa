@@ -116,20 +116,19 @@
 
         <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
         <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
-        <iterator-maven-plugin.version>0.4</iterator-maven-plugin.version>
-        <build-helper-maven-plugin.version>1.12</build-helper-maven-plugin.version> <!-- 1.11 -->
+        <iterator-maven-plugin.version>0.5.0</iterator-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version> <!-- 1.12 -->
 
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <!-- Sonar -->
-        <sonar-maven-plugin.version>3.2</sonar-maven-plugin.version> <!-- 3.0.2 -->
-        <sonar-mariadb-java-client.version>1.5.5</sonar-mariadb-java-client.version> <!--  mariadb-java-client : 1.4.6-->
-        <!-- SCM tools -->
+        <sonar-maven-plugin.version>3.3.0.603</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
 
+        <!-- SCM tools -->
         <maven-scm-provider-svnjava.version>2.1.2</maven-scm-provider-svnjava.version> <!-- 2.1.1 -->
         <maven.svnkit.version>1.7.11</maven.svnkit.version>
 
-        <docker-maven-plugin.fabric8.version>0.20.0</docker-maven-plugin.fabric8.version>
+        <docker-maven-plugin.fabric8.version>0.20.1</docker-maven-plugin.fabric8.version>
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
 
     </properties>
@@ -219,13 +218,6 @@
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar-maven-plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.mariadb.jdbc</groupId>
-                            <artifactId>mariadb-java-client</artifactId>
-                            <version>${sonar-mariadb-java-client.version}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -291,6 +283,7 @@
                     <plugin>
                         <groupId>org.sonarsource.scanner.maven</groupId>
                         <artifactId>sonar-maven-plugin</artifactId>
+                        <version>${sonar-maven-plugin.version}</version>
                     </plugin>
                 </plugins>
             </build>
