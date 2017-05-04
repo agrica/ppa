@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
@@ -90,7 +91,7 @@
         <!-- Les URLs pour le d�ploiement des artifacts -->
         <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
         <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
- 
+
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
         <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
         <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
@@ -136,7 +137,6 @@
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
 
     </properties>
-
 
 
     <build>
@@ -226,8 +226,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-
-
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
@@ -250,9 +248,30 @@
                     <!-- Whether to turn off maven deployment. If false the "deploy" goal is called. If true the "install" goal is called -->
                     <noDeploy>true</noDeploy>
                     <squash>true</squash>
-                    <scmCommentPrefix>[RELEASE] </scmCommentPrefix>
+                    <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
                 </configuration>
             </plugin>
+
+            <!-- TimeStamp -->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<version>${build-helper-maven-plugin.version}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>timestamp-property</id>-->
+                        <!--<goals>-->
+                            <!--<goal>timestamp-property</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<name>build.time</name>-->
+                            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
+                            <!--<locale>en_US</locale>-->
+                            <!--<timeZone>EST</timeZone>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <!-- Build Number -->
             <!--<plugin>-->
