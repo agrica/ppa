@@ -9,5 +9,5 @@ mvn dependency:resolve-plugins
 
 # Release
 ```
-mvn -B release:prepare release:perform -DreleaseVersion=0.1.2 -DdevelopmentVersion=0.1.3-SNAPSHOT
+mvn -B release:prepare release:perform -DreleaseVersion=0.1.4 -DdevelopmentVersion=0.1.5-SNAPSHOT
 ```
