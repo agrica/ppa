@@ -66,6 +66,9 @@
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- propriete qui indique l'utilisation de npm pour lire les fichiers package.json --> 
+        <npm.activate>true</npm.activate>
+        
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
 
@@ -88,7 +91,7 @@
         <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
         <!--<build.date>${maven.build.timestamp}</build.date>-->
 
-        <!-- Les URLs pour le d�ploiement des artifacts -->
+        <!-- Les URLs pour le deploiement des artifacts -->
         <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
         <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
 
@@ -320,6 +323,10 @@
                 <file>
                     <exists>package.json</exists>
                 </file>
+                <property>
+                    <name>npm.activate</name>
+                    <value>true</value>
+                </property>
             </activation>
             <build>
                 <plugins>
