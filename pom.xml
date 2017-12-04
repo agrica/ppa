@@ -129,7 +129,7 @@
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <!-- Sonar -->
-        <sonar-maven-plugin.version>3.3.0.603</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
+        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
 
         <!-- SCM tools -->
         <maven-scm-provider-svnjava.version>2.1.2</maven-scm-provider-svnjava.version> <!-- 2.1.1 -->
