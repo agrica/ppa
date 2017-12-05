@@ -66,13 +66,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- propriete qui indique l'utilisation de npm pour lire les fichiers package.json --> 
-        <npm.activate>true</npm.activate>
+        <!--<npm.activate>true</npm.activate>-->
         
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
 
         <!-- La version de maven -->
-        <maven.version>3.3.9</maven.version>
+        <maven.version>3.5.0</maven.version>
         <!-- Le niveau de compatibilite des sources du projet -->
         <compile.source>1.8</compile.source>
         <!-- Le niveau de compatibilite des binaires du projet -->
@@ -118,12 +118,13 @@
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-
-        <versions-maven-plugin.version>2.3</versions-maven-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-site-plugin.version>3.6</maven-site-plugin.version>
+        <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
 
         <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-        <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
-        <iterator-maven-plugin.version>0.5.0</iterator-maven-plugin.version>
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
+        <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version> <!-- 1.12 -->
 
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
@@ -135,7 +136,7 @@
         <maven-scm-provider-svnjava.version>2.1.2</maven-scm-provider-svnjava.version> <!-- 2.1.1 -->
         <maven.svnkit.version>1.7.11</maven.svnkit.version>
 
-        <docker-maven-plugin.fabric8.version>0.20.1</docker-maven-plugin.fabric8.version>
+        <docker-maven-plugin.fabric8.version>0.23.0</docker-maven-plugin.fabric8.version>
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
 
     </properties>
@@ -171,11 +172,21 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
                 </plugin>
-                <!-- Javadoc -->
+                <!-- Install & Deploy -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
                 </plugin>
                 <!-- Version -->
                 <plugin>
@@ -317,15 +328,15 @@
 
         <!-- Npm Install -->
         <profile>
-            <id>npm-install</id>
+            <id>yarn-install</id>
             <activation>
                 <file>
                     <exists>package.json</exists>
                 </file>
-                <property>
-                    <name>npm.activate</name>
-                    <value>true</value>
-                </property>
+                <!--<property>-->
+                    <!--<name>npm.activate</name>-->
+                    <!--<value>true</value>-->
+                <!--</property>-->
             </activation>
             <build>
                 <plugins>
@@ -335,13 +346,13 @@
                         <version>${exec-maven-plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>npm-install</id>
+                                <id>yarn-install</id>
                                 <phase>initialize</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>npm</executable>
+                                    <executable>yarn</executable>
                                     <arguments>
                                         <argument>install</argument>
                                     </arguments>
@@ -356,7 +367,7 @@
                         <version>${maven-clean-plugin.version}</version>
                         <executions>
                             <execution>
-                                <id>npm-clean</id>
+                                <id>yarn-clean</id>
                                 <phase>clean</phase>
                                 <goals>
                                     <goal>clean</goal>
