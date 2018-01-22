@@ -116,6 +116,7 @@
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
@@ -167,6 +168,11 @@
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
                 <!-- Javadoc -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -217,17 +223,7 @@
                     <artifactId>iterator-maven-plugin</artifactId>
                     <version>${iterator-maven-plugin.version}</version>
                 </plugin>
-                <!-- Buildnumber -->
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>${buildnumber-maven-plugin.version}</version>
-                    <configuration>
-                        <revisionOnScmFailure>${buildnumber.revisionOnScmFailure}</revisionOnScmFailure>
-                        <doCheck>${buildnumber.doCheck}</doCheck>
-                        <doUpdate>${buildnumber.doUpdate}</doUpdate>
-                    </configuration>
-                </plugin>
+
 
                 <!-- ************************* -->
                 <!-- Plugins pour Sonar        -->
@@ -263,6 +259,18 @@
                     <noDeploy>true</noDeploy>
                     <squash>true</squash>
                     <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
+                </configuration>
+            </plugin>
+
+            <!-- Buildnumber -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${buildnumber-maven-plugin.version}</version>
+                <configuration>
+                    <revisionOnScmFailure>${buildnumber.revisionOnScmFailure}</revisionOnScmFailure>
+                    <doCheck>${buildnumber.doCheck}</doCheck>
+                    <doUpdate>${buildnumber.doUpdate}</doUpdate>
                 </configuration>
             </plugin>
 
