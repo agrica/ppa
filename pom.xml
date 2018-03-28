@@ -70,6 +70,8 @@
         
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
+        <git.branch>${scmBranch}</git.branch>
+        <git.commit.sha1>${buildNumber}</git.commit.sha1>
 
         <!-- La version de maven -->
         <maven.version>3.5.0</maven.version>
@@ -267,10 +269,19 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <version>${buildnumber-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <revisionOnScmFailure>${buildnumber.revisionOnScmFailure}</revisionOnScmFailure>
                     <doCheck>${buildnumber.doCheck}</doCheck>
                     <doUpdate>${buildnumber.doUpdate}</doUpdate>
+                    <shortRevisionLength>8</shortRevisionLength>
                 </configuration>
             </plugin>
 
