@@ -66,7 +66,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- propriete qui indique l'utilisation de npm pour lire les fichiers package.json --> 
-        <!--<npm.activate>true</npm.activate>-->
+        <npm.activate>true</npm.activate>
         
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
@@ -161,6 +161,7 @@
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
+                        <pushChanges>false</pushChanges>
                         <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
@@ -353,10 +354,10 @@
                 <file>
                     <exists>package.json</exists>
                 </file>
-                <!--<property>-->
-                    <!--<name>npm.activate</name>-->
-                    <!--<value>true</value>-->
-                <!--</property>-->
+                <property>
+                    <name>npm.activate</name>
+                    <value>true</value>
+                </property>
             </activation>
             <build>
                 <plugins>
