@@ -161,7 +161,7 @@
                     <configuration>
                         <!-- During release:perform, enable the "release" profile -->
                         <releaseProfiles>release</releaseProfiles>
-                        <pushChanges>false</pushChanges>
+                        <!--<pushChanges>false</pushChanges>-->
                         <!--<goals>sonar:sonar</goals>-->
                     </configuration>
                 </plugin>
