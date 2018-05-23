@@ -22,7 +22,7 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-    <!-- Elements pour le deploiement dans les repositories Generali -->
+    <!-- Elements pour le deploiement dans les repositories Agrica -->
     <distributionManagement>
         <repository>
             <id>nexus</id>
