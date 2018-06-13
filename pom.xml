@@ -143,6 +143,8 @@
         <docker-maven-plugin.fabric8.version>0.23.0</docker-maven-plugin.fabric8.version>
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
 
+        <!-- Changelog -->
+        <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
     </properties>
 
 
@@ -236,6 +238,14 @@
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>${sonar-maven-plugin.version}</version>
                 </plugin>
+
+                <!-- Plugins pour generer le changelog -->
+                <plugin>
+                    <groupId>com.github.danielflower.mavenplugins</groupId>
+                    <artifactId>gitlog-maven-plugin</artifactId>
+                    <version>${gitlog-maven-plugin.version}</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
         <plugins>
