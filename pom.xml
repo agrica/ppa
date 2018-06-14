@@ -297,6 +297,26 @@
             </plugin>
 
             <!-- TimeStamp -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>changelog-start</name>
+                            <pattern>yyyy-MM-dd 00:00:00</pattern>
+                            <timeZone>GMT</timeZone>
+                            <locale>en_US</locale>
+                            <unit>month</unit>
+                            <offset>-2</offset>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--<plugin>-->
                 <!--<groupId>org.codehaus.mojo</groupId>-->
                 <!--<artifactId>build-helper-maven-plugin</artifactId>-->
