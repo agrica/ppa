@@ -384,11 +384,6 @@
                 <file>
                     <exists>package.json</exists>
                 </file>
-                <!-- Do not work -->
-                <!-- <property>-->
-                    <!--<name>npm.activate</name>-->
-                    <!--<value>true</value>-->
-                <!--</property>-->
             </activation>
             <build>
                 <plugins>
