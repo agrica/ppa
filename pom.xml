@@ -144,7 +144,7 @@
         <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
 
         <!-- Changelog -->
-        <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
+        <gitlog-maven-plugin.version>1.13.12</gitlog-maven-plugin.version>
     </properties>
 
 
