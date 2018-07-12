@@ -18,5 +18,5 @@ mvn versions:display-dependency-updates
 
 # Release
 ```
-mvn -B release:prepare release:perform -DreleaseVersion=0.1.14 -DdevelopmentVersion=0.1.15-SNAPSHOT
+mvn -B release:prepare release:perform -DreleaseVersion=0.2.0-M1 -DdevelopmentVersion=0.2.0-SNAPSHOT
 ```
