@@ -1,0 +1,19 @@
+<assembly>
+    <id>release-notes</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <files>
+        <!-- Version -->
+        <file>
+            <source>${release-notes.build.dir}/CHANGELOG.md</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>false</filtered>
+            <fileMode>0644</fileMode>
+        </file>
+    </files>
+
+</assembly>

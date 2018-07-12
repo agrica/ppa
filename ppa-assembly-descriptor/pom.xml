@@ -2,19 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.agrica.socle.ppa</groupId>
+        <artifactId>ppa-parent</artifactId>
+        <version>0.1.16-SNAPSHOT</version>
+    </parent>
+
     <!-- Identification du projet -->
-    <groupId>com.agrica.socle.ppa</groupId>
-    <artifactId>ppa-parent</artifactId>
+    <artifactId>ppa-assembly-descriptor</artifactId>
     <version>0.1.16-SNAPSHOT</version>
 
-    <name>PPA parent</name>
+    <name>Shared Assembly Descriptor</name>
 
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>ppa-assembly-descriptor</module>
-        <module>ppa</module>
-    </modules>
 
 </project>
 	
