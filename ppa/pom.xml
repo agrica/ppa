@@ -29,19 +29,6 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-    <!-- Elements pour le deploiement dans les repositories Agrica -->
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <name>Release Repository</name>
-            <url>${dist.releases.url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus</id>
-            <name>Snapshots Repository</name>
-            <url>${dist.snapshots.url}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 
 
@@ -94,9 +81,6 @@
         <!--<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>-->
         <!--<build.date>${maven.build.timestamp}</build.date>-->
 
-        <!-- Les URLs pour le deploiement des artifacts -->
-        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
-        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
 
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
         <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>

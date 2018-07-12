@@ -11,6 +11,21 @@
 
     <packaging>pom</packaging>
 
+    <!-- Elements pour le deploiement dans les repositories Agrica -->
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Release Repository</name>
+            <url>${dist.releases.url}</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Snapshots Repository</name>
+            <url>${dist.snapshots.url}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
     <scm>
         <connection>scm:git:ssh://gitlab-dei:socle/ppa.git</connection>
         <developerConnection>scm:git:git@gitlab-dei:socle/ppa.git</developerConnection>
@@ -18,6 +33,11 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <!-- Les URLs pour le deploiement des artifacts -->
+        <dist.snapshots.url>http://nexus/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus/repository/maven-releases/</dist.releases.url>
+    </properties>
 
     <modules>
         <module>ppa-assembly-descriptor</module>
