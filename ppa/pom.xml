@@ -83,6 +83,7 @@
 
 
         <!-- Les URLs pour les applications de l'USINE DE DEV JAVA -->
+        <usine.url.jira>http://jira.agrica.loc</usine.url.jira>
         <usine.url.bugtracker.jira>http://jira/browse</usine.url.bugtracker.jira>
         <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
         <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
@@ -549,7 +550,7 @@
                                     <!-- JIRA -->
                                     <jiraUsername>${jira.username}</jiraUsername>
                                     <jiraPassword>${jira.password}</jiraPassword>
-                                    <jiraServer>http://jira.agrica.loc/</jiraServer>
+                                    <jiraServer>${usine.url.jira}</jiraServer>
                                     <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
                                     <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you
                                     can extract "1.5" and use only that as tag name. -->
@@ -560,9 +561,9 @@
                                     <file>${release-notes.build.dir}/CHANGELOG.md</file>
                                     <templateContent>
                                         <![CDATA[
-# Git Changelog Maven plugin changelog
+# Release Notes
 
-Changelog of Git Changelog Maven plugin.
+Changelog des évènements Git.
 
 {{#tags}}
 ## {{name}}
