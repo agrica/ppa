@@ -9,7 +9,7 @@
     <files>
         <!-- Version -->
         <file>
-            <source>${release-notes.build.dir}/CHANGELOG.md</source>
+            <source>${release-notes.build.dir}/CHANGELOG-*.md</source>
             <outputDirectory>/</outputDirectory>
             <filtered>false</filtered>
             <fileMode>0644</fileMode>
