@@ -558,12 +558,12 @@
                                     <!--<settingsFile>changelog.json</settingsFile>-->
                                     <!--<templateFile>changelog.mustache</templateFile>-->
                                     <!-- A file on filesystem //-->
-                                    <file>${release-notes.build.dir}/CHANGELOG.md</file>
+                                    <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
                                     <templateContent>
                                         <![CDATA[
 # Release Notes
 
-Changelog des évènements Git.
+Changelog des vnements Git.
 
 {{#tags}}
 ## {{name}}
