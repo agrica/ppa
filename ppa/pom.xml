@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.agrica.socle.ppa</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3-SNAPSHOT</version>
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -609,7 +609,7 @@ Changelog des vnements Git.
                             <dependency>
                                 <groupId>com.agrica.socle.ppa</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>0.2.2</version>
+                                <version>0.2.3-SNAPSHOT</version>
                             </dependency>
                         </dependencies>
                         <configuration>
