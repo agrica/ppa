@@ -10,7 +10,7 @@
         <!-- Version -->
         <file>
             <source>${release-notes.build.dir}/CHANGELOG-${project.version}.md</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory></outputDirectory>
             <filtered>false</filtered>
             <fileMode>0644</fileMode>
         </file>

@@ -62,6 +62,13 @@
         <git.branch>${scmBranch}</git.branch>
         <git.commit.sha1>${buildNumber}</git.commit.sha1>
 
+        <!-- Git Changelog configuration -->
+        <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
+        <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
+        <git-changelog-fromRef></git-changelog-fromRef>
+        <git-changelog-toRef>HEAD</git-changelog-toRef>
+        <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
+
         <!-- La version de maven -->
         <maven.version>3.5.0</maven.version>
         <!-- Le niveau de compatibilite des sources du projet -->
@@ -132,7 +139,10 @@
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.54</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
+
+
+
     </properties>
 
 
@@ -217,10 +227,72 @@
                     <version>${iterator-maven-plugin.version}</version>
                 </plugin>
 
+                <!-- ***************************** -->
+                <!-- Plugins pour Release Notes    -->
+                <!-- ***************************** -->
+                <plugin>
+                    <groupId>se.bjurr.gitchangelog</groupId>
+                    <artifactId>git-changelog-maven-plugin</artifactId>
+                    <version>${git-changelog-maven-plugin.version}</version>
+                            <configuration>
+                                <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
+                                <!-- JIRA -->
+                                <jiraUsername>${jira.username}</jiraUsername>
+                                <jiraPassword>${jira.password}</jiraPassword>
+                                <jiraServer>${usine.url.jira}</jiraServer>
+                                <fromRef>${git-changelog-fromRef}</fromRef>
+                                <toRef>${git-changelog-toRef}</toRef>
+                                <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
+                                <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
+                                <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
+                                <!--<settingsFile>changelog.json</settingsFile>-->
+                                <!--<templateFile>changelog.mustache</templateFile>-->
+                                <!-- A file on filesystem //-->
+                                <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
+                                <templateContent>
+                                    <![CDATA[
+# Git Changelog Maven plugin changelog
 
-                <!-- ************************* -->
-                <!-- Plugins pour Sonar        -->
-                <!-- ************************ -->
+Changelog of Git Changelog Maven plugin.
+
+{{#tags}}
+## {{name}}
+ {{#issues}}
+  {{#hasIssue}}
+   {{#hasLink}}
+### {{name}} [{{issue}}]({{link}}) {{title}}
+   {{/hasLink}}
+   {{^hasLink}}
+### {{name}} {{issue}} {{title}}
+   {{/hasLink}}
+  {{/hasIssue}}
+  {{^hasIssue}}
+### {{name}}
+  {{/hasIssue}}
+
+  {{#commits}}
+**{{{messageTitle}}}**
+
+{{#messageBodyItems}}
+ * {{.}}
+{{/messageBodyItems}}
+
+[{{hash}}](${git-changelog-gitServerApi}/{{hash}}) {{authorName}} *{{commitTime}}*
+
+  {{/commits}}
+
+ {{/issues}}
+{{/tags}}
+
+]]>
+                                </templateContent>
+
+                            </configuration>
+                </plugin>
+
+                <!-- ***************************** -->
+                <!-- Plugins pour Sonar            -->
+                <!-- ***************************** -->
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
@@ -237,31 +309,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>${jgitflow-maven-plugin.version}</version>
-                <configuration>
-                    <flowInitContext>
-                        <masterBranchName>master</masterBranchName>
-                        <developBranchName>development</developBranchName>
-                        <featureBranchPrefix>feature-</featureBranchPrefix>
-                        <releaseBranchPrefix>release-</releaseBranchPrefix>
-                        <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
-                        <versionTagPrefix>version-</versionTagPrefix>
-                    </flowInitContext>
-                    <enableSshAgent>true</enableSshAgent>
-                    <!-- Whether to automatically assign submodules the parent version. If set to false, the user will be prompted for the version of each submodules. -->
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <!--<username>t_int_cont</username>-->
-                    <!--<password>PASSWORD_FOR_A_GIT_USER</password>-->
-
-                    <!-- Whether to turn off maven deployment. If false the "deploy" goal is called. If true the "install" goal is called -->
-                    <noDeploy>true</noDeploy>
-                    <squash>true</squash>
-                    <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
-                </configuration>
-            </plugin>
 
             <!-- Buildnumber -->
             <plugin>
@@ -524,9 +571,6 @@
                     <exists>.git</exists>
                 </file>
             </activation>
-            <properties>
-                <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
-            </properties>
             <build>
                 <plugins>
                     <!-- ************************* -->
@@ -545,59 +589,6 @@
                                 <goals>
                                     <goal>git-changelog</goal>
                                 </goals>
-                                <configuration>
-                                    <ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>
-                                    <!-- JIRA -->
-                                    <jiraUsername>${jira.username}</jiraUsername>
-                                    <jiraPassword>${jira.password}</jiraPassword>
-                                    <jiraServer>${usine.url.jira}</jiraServer>
-                                    <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
-                                    <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you
-                                    can extract "1.5" and use only that as tag name. -->
-                                    <!--<readableTagName>-([^-]+?)$</readableTagName>-->
-                                    <!--<settingsFile>changelog.json</settingsFile>-->
-                                    <!--<templateFile>changelog.mustache</templateFile>-->
-                                    <!-- A file on filesystem //-->
-                                    <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
-                                    <templateContent>
-                                        <![CDATA[
-# Release Notes
-
-Changelog des vnements Git.
-
-{{#tags}}
-## {{name}}
- {{#issues}}
-  {{#hasIssue}}
-   {{#hasLink}}
-### {{name}} [{{issue}}]({{link}}) {{title}}
-   {{/hasLink}}
-   {{^hasLink}}
-### {{name}} {{issue}} {{title}}
-   {{/hasLink}}
-  {{/hasIssue}}
-  {{^hasIssue}}
-### {{name}}
-  {{/hasIssue}}
-
-  {{#commits}}
-**{{{messageTitle}}}**
-
-{{#messageBodyItems}}
- * {{.}}
-{{/messageBodyItems}}
-
-[{{hash}}](http://gitlab-dei/ditw/hdf/commit//{{hash}}) {{authorName}} *{{commitTime}}*
-
-  {{/commits}}
-
- {{/issues}}
-{{/tags}}
-
-]]>
-                                    </templateContent>
-
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
