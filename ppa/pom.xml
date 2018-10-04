@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.agrica.socle.ppa</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>0.2.5-SNAPSHOT</version>
+        <version>0.2.5</version>
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.2.5-SNAPSHOT</version>
+    <version>0.2.5</version>
 
     <packaging>pom</packaging>
 
@@ -65,7 +65,7 @@
         <!-- Git Changelog configuration -->
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef></git-changelog-fromRef>
+        <git-changelog-fromRef />
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
 
@@ -600,7 +600,7 @@ Changelog of Git Changelog Maven plugin.
                             <dependency>
                                 <groupId>com.agrica.socle.ppa</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>0.2.5-SNAPSHOT</version>
+                                <version>0.2.5</version>
                             </dependency>
                         </dependencies>
                         <configuration>
