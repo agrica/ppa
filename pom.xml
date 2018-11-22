@@ -14,12 +14,12 @@
     <!-- Elements pour le deploiement dans les repositories Agrica -->
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <id>nexus</id>
             <name>Release Repository</name>
             <url>${dist.releases.url}</url>
         </repository>
         <snapshotRepository>
-            <id>snapshot</id>
+            <id>nexus</id>
             <name>Snapshots Repository</name>
             <url>${dist.snapshots.url}</url>
         </snapshotRepository>
