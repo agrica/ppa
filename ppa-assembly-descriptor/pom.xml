@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.agrica.socle.ppa</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>0.2.6-M9-SNAPSHOT</version>
+        <version>0.2.6-M9</version>
     </parent>
 
     <!-- Identification du projet -->
     <artifactId>ppa-assembly-descriptor</artifactId>
-    <version>0.2.6-M9-SNAPSHOT</version>
+    <version>0.2.6-M9</version>
 
     <name>Shared Assembly Descriptor</name>
 </project>
