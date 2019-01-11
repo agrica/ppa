@@ -6,7 +6,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa-parent</artifactId>
-    <version>0.2.6-M5-SNAPSHOT</version>
+    <version>0.2.6-M11-SNAPSHOT</version>
 
     <name>PPA parent</name>
 
