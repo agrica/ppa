@@ -48,8 +48,8 @@
         <profile>
             <id>socle</id>
             <properties>
-                <dist.snapshots.url>http://nexus/repository/maven-socles-releases/</dist.snapshots.url>
-                <dist.releases.url>http://nexus/repository/maven-socles-releases/</dist.releases.url>
+                <dist.snapshots.url>http://nexus/repository/maven-socle-releases/</dist.snapshots.url>
+                <dist.releases.url>http://nexus/repository/maven-socle-releases/</dist.releases.url>
             </properties>
         </profile>
     </profiles>
