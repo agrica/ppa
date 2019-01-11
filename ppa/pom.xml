@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.agrica.socle.ppa</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>0.2.6-M7</version>
+        <version>0.2.6-M8-SNAPSHOT</version>
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.2.6-M7</version>
+    <version>0.2.6-M8-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -600,7 +600,7 @@ Changelog of Git Changelog Maven plugin.
                             <dependency>
                                 <groupId>com.agrica.socle.ppa</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>0.2.6-M7</version>
+                                <version>0.2.6-M8-SNAPSHOT</version>
                             </dependency>
                         </dependencies>
                         <configuration>
