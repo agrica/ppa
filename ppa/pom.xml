@@ -11,7 +11,7 @@
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.2.6-SNAPSHOT</version>
+    <version>0.2.5</version>
 
     <packaging>pom</packaging>
 
