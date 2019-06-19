@@ -585,7 +585,7 @@ Changelog of Git Changelog Maven plugin.
                         <executions>
                             <execution>
                                 <id>GenerateGitChangelog</id>
-                                <phase>generate-sources</phase>
+                                <phase>prepare-package</phase>
                                 <goals>
                                     <goal>git-changelog</goal>
                                 </goals>
@@ -600,7 +600,7 @@ Changelog of Git Changelog Maven plugin.
                             <dependency>
                                 <groupId>com.agrica.socle.ppa</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>0.2.5</version>
+                                <version>${project.version}</version>
                             </dependency>
                         </dependencies>
                         <configuration>
