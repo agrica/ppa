@@ -600,7 +600,7 @@ Changelog of Git Changelog Maven plugin.
                             <dependency>
                                 <groupId>com.agrica.socle.ppa</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>${project.version}</version>
+                                <version>0.2.5</version>
                             </dependency>
                         </dependencies>
                         <configuration>
