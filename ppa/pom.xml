@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.agrica.socle.ppa</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>0.2.10-SNAPSHOT</version>
+        <version>0.2.10-M1</version>
     </parent>
 
     <!-- Identification du projet -->
     <groupId>com.agrica.socle.ppa</groupId>
     <artifactId>ppa</artifactId>
-    <version>0.2.10-SNAPSHOT</version>
+    <version>0.2.10-M1</version>
 
     <packaging>pom</packaging>
 
