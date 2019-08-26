@@ -139,7 +139,7 @@
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.7</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.55</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.60</git-changelog-maven-plugin.version>
 
 
 
