@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.agrica.socle.ppa</groupId>
+        <groupId>io.github.agrica</groupId>
         <artifactId>ppa-parent</artifactId>
          <version>0.2.11-SNAPSHOT</version>
     </parent>

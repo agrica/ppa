@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.agrica.socle.ppa</groupId>
+        <groupId>io.github.agrica</groupId>
         <artifactId>ppa-parent</artifactId>
         <version>0.2.11-SNAPSHOT</version>
     </parent>
 
     <!-- Identification du projet -->
-    <groupId>com.agrica.socle.ppa</groupId>
+    <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
     <version>0.2.11-SNAPSHOT</version>
 
@@ -29,14 +29,24 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-
-
-
-
-    <!--<ciManagement>-->
-    <!--<system>Jenkins</system>-->
-    <!--<url>${usine.url.ci}/job/${code.cmdb}-${project.artifactId}-trunk-ci</url>-->
-    <!--</ciManagement>-->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+	
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <issueManagement>
         <system>JIRA</system>
@@ -598,9 +608,9 @@ Changelog of Git Changelog Maven plugin.
                         <artifactId>maven-assembly-plugin</artifactId>
                         <dependencies>
                             <dependency>
-                                <groupId>com.agrica.socle.ppa</groupId>
+                                <groupId>io.github.agrica</groupId>
                                 <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>0.2.5</version>
+                                <version>${project.version}</version>
                             </dependency>
                         </dependencies>
                         <configuration>
@@ -628,73 +638,6 @@ Changelog of Git Changelog Maven plugin.
             </build>
         </profile>
 
-
-        <!--<profile>-->
-        <!--<id>code-check</id>-->
-        <!--<build>-->
-        <!--<defaultGoal>sonar:sonar</defaultGoal>-->
-        <!--</build>-->
-        <!--</profile>-->
-
-        <!-- GIT Build Number 
-        <profile>
-            <id>git-scm</id>
-            <activation>
-                <file>
-                    <exists>.git</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                        <configuration>
-                            <shortRevisionLength>6</shortRevisionLength>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
--->
-        <!-- SVN Build Number
-        <profile>
-            <id>svn-scm</id>
-            <activation>
-                <file>
-                    <exists>.svn</exists>
-                </file>
-            </activation>
-            <properties>
-                <buildnumber.provider.svn>javasvn</buildnumber.provider.svn>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                        <configuration>
-                            <providerImplementations>
-                                <svn>${buildnumber.provider.svn}</svn>
-                            </providerImplementations>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.google.code.maven-scm-provider-svnjava</groupId>
-                                <artifactId>maven-scm-provider-svnjava</artifactId>
-                                <version>${maven-scm-provider-svnjava.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.tmatesoft.svnkit</groupId>
-                                <artifactId>svnkit</artifactId>
-                                <version>1.7.11</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
- -->
     </profiles>
 </project>
 	
