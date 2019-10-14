@@ -11,6 +11,18 @@
 
     <packaging>pom</packaging>
 
+	<organization>
+        <name>Agrica</name>
+        <url>https://www.groupagrica.com/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+	
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -21,6 +33,19 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+	<developers>
+		<developer>
+			<name>Vincent Dupain</name>
+			<email>vdupain@gmail.com</email>
+			<organizationurl>https://www.groupagrica.com/</organizationurl>
+		</developer>
+		<developer>
+			<name>Jerome Morille</name>
+			<email>morille.jerome@groupagrica.com</email>
+			<organizationurl>https://www.groupagrica.com/</organizationurl>
+		</developer>
+	</developers>
 
     <scm>
         <connection>scm:git:https://github.com/agrica/ppa.git</connection>
