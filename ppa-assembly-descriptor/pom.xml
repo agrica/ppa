@@ -5,12 +5,12 @@
     <parent>
         <groupId>io.github.agrica</groupId>
         <artifactId>ppa-parent</artifactId>
-         <version>0.2.11-SNAPSHOT</version>
+         <version>${revision}</version>
     </parent>
 
     <!-- Identification du projet -->
     <artifactId>ppa-assembly-descriptor</artifactId>
-    <version>0.2.11-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <name>Shared Assembly Descriptor</name>
 </project>
