@@ -1,0 +1,42 @@
+language: java
+jdk: openjdk11
+
+## export GPG details
+before_install:
+    - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
+    - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi    
+  
+install:
+    mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+
+## Build and release to maven central  
+#script: 
+#    mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+
+## Get the project version
+before_deploy:
+    - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+    - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')    
+
+## Create release
+deploy:
+  -
+    provider: script
+    #script: .travis/deploy.sh
+    script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    skip_cleanup: true
+    on:
+      repo: agrica/ppa
+      branch: master
+  -
+    provider: script
+    #script: .travis/deploy.sh
+    script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    skip_cleanup: true
+    on:
+      repo: agrica/ppa
+      tags: true
+    
+cache:
+    directories:
+        - ~/.m2/repository
