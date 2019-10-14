@@ -38,12 +38,12 @@
 		<developer>
 			<name>Vincent Dupain</name>
 			<email>vdupain@gmail.com</email>
-			<organizationurl>https://www.groupagrica.com/</organizationurl>
+			<organizationUrl>https://www.groupagrica.com/</organizationUrl>
 		</developer>
 		<developer>
 			<name>Jerome Morille</name>
 			<email>morille.jerome@groupagrica.com</email>
-			<organizationurl>https://www.groupagrica.com/</organizationurl>
+			<organizationUrl>https://www.groupagrica.com/</organizationUrl>
 		</developer>
 	</developers>
 
