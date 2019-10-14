@@ -28,12 +28,12 @@
     </scm>	
 
     <properties>
-		<revision>0.2.11-SNAPSHOT</revision>	
+	<revision>3.0.0-alpha1</revision>	
         <!-- Les URLs pour le deploiement des artifacts -->
         <dist.snapshots.url>https://oss.sonatype.org/content/repositories/snapshots/</dist.snapshots.url>
         <dist.releases.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</dist.releases.url>
-		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>	
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>		
+	<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>	
+	<maven-source-plugin.version>3.0.1</maven-source-plugin.version>		
     </properties>
 
     <modules>
