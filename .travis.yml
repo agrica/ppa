@@ -7,7 +7,7 @@ before_install:
     - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi    
   
 install:
-    mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+    mvn --settings .travis/settings.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
 
 ## Build and release to maven central  
 #script: 
@@ -22,16 +22,14 @@ before_deploy:
 deploy:
   -
     provider: script
-    #script: .travis/deploy.sh
-    script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    script: .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: agrica/ppa
       branch: master
   -
     provider: script
-    #script: .travis/deploy.sh
-    script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    script: .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: agrica/ppa
@@ -40,3 +38,11 @@ deploy:
 cache:
     directories:
         - ~/.m2/repository
+
+notifications:
+  email:
+    recipients:
+      - dupain.vincent@groupagrica.com
+      - morille.jerome@groupagrica.com
+    on_success: always # default: change
+    on_failure: always # default: always      
