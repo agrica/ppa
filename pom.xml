@@ -59,10 +59,10 @@
 
     <properties>
         <!-- Les URLs pour le deploiement des artifacts -->
-        <dist.snapshots.url>https://oss.sonatype.org/content/repositories/snapshots/</dist.snapshots.url>
-        <dist.releases.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</dist.releases.url>
-		<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>	
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>		
+        <dist.snapshots.url>http://nexus.agrica.loc/repository/maven-snapshots/</dist.snapshots.url>
+        <dist.releases.url>http://nexus.agrica.loc/repository/maven-releases/</dist.releases.url>
+	<maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>	
+	<maven-source-plugin.version>3.0.1</maven-source-plugin.version>		
     </properties>
 
     <modules>
@@ -75,8 +75,18 @@
             <id>release</id>
             <activation>
                 <property>
-                    <name>release</name>
+                    <name>ossrh-release</name>
                 </property>
+		<distributionManagement>
+			<snapshotRepository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			</snapshotRepository>
+			<repository>
+				<id>ossrh</id>
+				<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			</repository>
+		</distributionManagement>		    
             </activation>
             <build>
                 <plugins>
