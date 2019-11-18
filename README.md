@@ -12,6 +12,7 @@ git tag -a $VERSION -m "Release version $VERSION"
 git push origin $VERSION
 g branch -D prepare-release
 ```
+==> https://repo1.maven.org/maven2/io/github/agrica/
 
 ## List plugins
 ```
