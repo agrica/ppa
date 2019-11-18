@@ -11,6 +11,7 @@ git commit -am "Prépare Release version $VERSION"
 git tag -a $VERSION -m "Release version $VERSION"
 git push origin --tags
 ```
+==> https://repo1.maven.org/maven2/io/github/agrica/
 
 ## List plugins
 ```
