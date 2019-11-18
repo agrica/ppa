@@ -1,4 +1,4 @@
-POM Parent Agrica  [![Build Status](http://jenkins/buildStatus/icon?job=socle/ci-SOCLE-PPA-master)](http://jenkins/job/socle/job/ci-SOCLE-PPA-master)
+POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=master)](https://travis-ci.com/agrica/ppa)
 ========
 
 # Maven command
