@@ -2,6 +2,14 @@ POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=
 ========
 
 # Maven command
+## Release OSS
+```bash
+git co -b $VERSION
+mvn versions:set -DnewVersion=$VERSION
+mvn clean install
+git push
+```
+
 ## List plugins
 ```
 mvn dependency:resolve-plugins
