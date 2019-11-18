@@ -4,10 +4,12 @@ POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=
 # Maven command
 ## Release OSS
 ```bash
-git co -b $VERSION
+git co -b prepare-release
 mvn versions:set -DnewVersion=$VERSION
 mvn clean install
-git push
+git commit -am "Prépare Release version $VERSION"
+git tag -a $VERSION -m "Release version $VERSION"
+git push origin --tags
 ```
 
 ## List plugins
