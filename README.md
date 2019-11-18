@@ -9,7 +9,8 @@ mvn versions:set -DnewVersion=$VERSION
 mvn clean install
 git commit -am "Prépare Release version $VERSION"
 git tag -a $VERSION -m "Release version $VERSION"
-git push origin --tags
+git push origin $VERSION
+g branch -D prepare-release
 ```
 
 ## List plugins
