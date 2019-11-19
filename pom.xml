@@ -68,7 +68,6 @@
     </properties>
 
     <modules>
-        <module>ppa-assembly-descriptor</module>
         <module>ppa</module>
     </modules>
     <profiles>

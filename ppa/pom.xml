@@ -73,6 +73,7 @@
         <git.commit.sha1>${buildNumber}</git.commit.sha1>
 
         <!-- Git Changelog configuration -->
+        <ppa-changelog-assembly-descriptor.version>0.0.4</ppa-changelog-assembly-descriptor.version>
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
         <git-changelog-fromRef />
@@ -608,8 +609,8 @@ Changelog of Git Changelog Maven plugin.
                         <dependencies>
                             <dependency>
                                 <groupId>io.github.agrica</groupId>
-                                <artifactId>ppa-assembly-descriptor</artifactId>
-                                <version>${project.version}</version>
+                                <artifactId>ppa-changelog-assembly-descriptor</artifactId>
+                                <version>${ppa-changelog-assembly-descriptor.version}</version>
                             </dependency>
                         </dependencies>
                         <configuration>
