@@ -34,7 +34,8 @@ deploy:
     on:
       repo: agrica/ppa
       tags: true
-    
+      condition: $TRAVIS_TAG =~ ^ossrh-.*$
+
 cache:
     directories:
         - ~/.m2/repository
