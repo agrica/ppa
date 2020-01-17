@@ -5,7 +5,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa-parent</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.4-SNAPSHOT</version>
 
     <name>PPA parent</name>
 
@@ -31,11 +31,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>${dist.snapshots.url}</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <url>${dist.releases.url}</url>
         </repository>
     </distributionManagement>
 
@@ -79,6 +79,10 @@
                     <name>ossrh-release</name>
                 </property>
             </activation>
+            <properties>
+                <dist.snapshots.url>https://oss.sonatype.org/content/repositories/snapshots</dist.snapshots.url>
+                <dist.releases.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</dist.releases.url>
+            </properties>
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
