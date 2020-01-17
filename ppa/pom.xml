@@ -469,6 +469,14 @@ Changelog of Git Changelog Maven plugin.
                                         <fileset>
                                             <directory>node_modules</directory>
                                         </fileset>
+                                        <fileset>
+                                            <directory>.</directory>
+                                            <includes>
+                                                <include>package-lock.json</include>
+                                                <include>yarn.lock</include>
+                                                <include>yarn-error.log</include>
+                                            </includes>
+                                        </fileset>
                                     </filesets>
                                 </configuration>
                             </execution>

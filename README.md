@@ -1,6 +1,10 @@
 POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=master)](https://travis-ci.com/agrica/ppa)
 ========
 
+## Usine
+* Travis: https://travis-ci.com/agrica
+*
+
 # Maven command
 ## Release OSS
 ```bash
