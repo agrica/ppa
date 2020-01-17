@@ -5,13 +5,13 @@
     <parent>
         <groupId>io.github.agrica</groupId>
         <artifactId>ppa-parent</artifactId>
-        <version>3.0.4-SNAPSHOT</version>
+        <version>3.0.4</version>
     </parent>
 
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.4</version>
 
     <packaging>pom</packaging>
 
