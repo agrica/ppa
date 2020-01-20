@@ -39,11 +39,11 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
+            <id>nexus</id>
             <url>${dist.snapshots.url}</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
+            <id>nexus</id>
             <url>${dist.releases.url}</url>
         </repository>
     </distributionManagement>
