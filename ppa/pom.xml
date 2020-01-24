@@ -140,7 +140,7 @@
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <!-- Sonar -->
-        <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version> <!-- 3.2 , 3.0.2 -->
+        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
 
         <!-- SCM tools -->
         <maven-scm-provider-svnjava.version>2.1.2</maven-scm-provider-svnjava.version> <!-- 2.1.1 -->
