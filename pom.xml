@@ -5,7 +5,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa-parent</artifactId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.5-SNAPSHOT</version>
 
     <name>PPA parent</name>
 
@@ -55,6 +55,7 @@
     <scm>
         <connection>scm:git:https://github.com/agrica/ppa.git</connection>
         <url>https://github.com/agrica/ppa</url>
+        <tag>HEAD</tag>
     </scm>	
 
     <properties>
