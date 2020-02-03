@@ -5,7 +5,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa-parent</artifactId>
-    <version>3.0.5-SNAPSHOT</version>
+    <version>3.0.5-M3</version>
 
     <name>PPA parent</name>
 
