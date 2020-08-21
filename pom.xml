@@ -5,11 +5,13 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.0.6-M1</version>
+    <version>3.0.6-M2-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
     <name>POM Parent Agrica</name>
+    <description>POM Parent Agrica</description>
+    <url>https://github.com/agrica/ppa</url>
 
     <organization>
         <name>Agrica</name>
