@@ -1,6 +1,7 @@
 # IDE
 .idea
 *.iml
+/.okhttpcache
 
 # Maven
 target
