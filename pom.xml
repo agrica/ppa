@@ -168,7 +168,7 @@
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.62</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.92</git-changelog-maven-plugin.version>
 
     </properties>
 
