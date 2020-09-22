@@ -82,9 +82,13 @@
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- propriete qui indique l'utilisation de npm pour lire les fichiers package.json --> 
-        <npm.activate>true</npm.activate>
-        
+        <!-- ================================= -->
+        <!-- Build JOB configuration               -->
+        <!-- ================================= -->
+        <yarn.install.skip>false</yarn.install.skip>
+        <gulp.test.skip>false</gulp.test.skip>
+        <bower.install.skip>false</bower.install.skip>
+
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
         <git.branch>${scmBranch}</git.branch>
@@ -168,7 +172,7 @@
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.92</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.62</git-changelog-maven-plugin.version>
 
     </properties>
 
@@ -417,6 +421,31 @@ Changelog of Git Changelog Maven plugin.
     </build>
 
     <profiles>
+        <!-- Skip Tests -->
+        <profile>
+            <id>nodeapp-skipTests</id>
+            <activation>
+                <property>
+                    <name>skipTests</name>
+                </property>
+            </activation>
+            <properties>
+                <gulp.test.skip>${skipTests}</gulp.test.skip>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>nodeapp-maven.test.skip</id>
+            <activation>
+                <property>
+                    <name>maven.test.skip</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <gulp.test.skip>${maven.test.skip}</gulp.test.skip>
+            </properties>
+        </profile>
 
         <!-- Sonar -->
         <profile>
@@ -461,6 +490,7 @@ Changelog of Git Changelog Maven plugin.
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${yarn.install.skip}</skip>
                                     <executable>yarn</executable>
                                     <arguments>
                                         <argument>install</argument>
@@ -526,6 +556,7 @@ Changelog of Git Changelog Maven plugin.
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${bower.install.skip}</skip>
                                     <executable>bower</executable>
                                     <arguments>
                                         <argument>install</argument>
@@ -586,6 +617,7 @@ Changelog of Git Changelog Maven plugin.
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+                                    <skip>${gulp.test.skip}</skip>
                                     <executable>gulp</executable>
                                     <arguments>
                                         <argument>test</argument>
