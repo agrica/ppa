@@ -165,6 +165,10 @@
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+
+        <!-- Generator -->
+        <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version>
+
         <!-- Sonar -->
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
 
