@@ -88,6 +88,7 @@
         <yarn.install.skip>false</yarn.install.skip>
         <gulp.test.skip>false</gulp.test.skip>
         <bower.install.skip>false</bower.install.skip>
+        <phpunit.test.skip>false</phpunit.test.skip>
 
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
@@ -444,6 +445,18 @@ Changelog of Git Changelog Maven plugin.
             </activation>
             <properties>
                 <gulp.test.skip>${maven.test.skip}</gulp.test.skip>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>phpunit-skipTests</id>
+            <activation>
+                <property>
+                    <name>skipTests</name>
+                </property>
+            </activation>
+            <properties>
+                <phpunit.test.skip>${skipTests}</phpunit.test.skip>
             </properties>
         </profile>
 
