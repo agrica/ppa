@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Identification du projet -->
@@ -82,12 +83,29 @@
         <!-- Cette propriete est utilisee au fur et a mesure par defaut par tous les plugins et sera integree dans une future version du POM -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- Packaging -->
+        <packaging.assembly.app.format>tar.gz</packaging.assembly.app.format>
+
         <!-- ================================= -->
-        <!-- Build JOB configuration               -->
+        <!-- Build Project configuration           -->
+        <!-- ================================= -->
+        <project.php.dir>sources/htdocs</project.php.dir>
+
+        <!-- Php -->
+        <composer.version>1.7.2</composer.version>
+        <composer.run.opts>-d memory_limit=-1</composer.run.opts>
+        <phpbin>${env.PHP73_BINDIR}/php</phpbin>
+        <phpunit.bin>./vendor/phpunit/phpunit/phpunit</phpunit.bin>
+        <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
+        <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
+
+        <!-- ================================= -->
+        <!-- Build JOB configuration           -->
         <!-- ================================= -->
         <yarn.install.skip>false</yarn.install.skip>
         <gulp.test.skip>false</gulp.test.skip>
         <bower.install.skip>false</bower.install.skip>
+        <composer.install.skip>false</composer.install.skip>
         <phpunit.test.skip>false</phpunit.test.skip>
 
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
@@ -99,7 +117,7 @@
         <ppa-changelog-assembly-descriptor.version>0.0.4</ppa-changelog-assembly-descriptor.version>
         <release-notes.build.dir>${project.build.directory}/release-notes</release-notes.build.dir>
         <git-changelog-readableTagName>-([^-]+?)$</git-changelog-readableTagName>
-        <git-changelog-fromRef />
+        <git-changelog-fromRef/>
         <git-changelog-toRef>HEAD</git-changelog-toRef>
         <git-changelog-gitServerApi>http://gitlab-dei/ditw/${project.artifactId}/commit</git-changelog-gitServerApi>
 
@@ -115,6 +133,8 @@
         <!-- Sonar -->
         <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
         <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
+        <sonar.php.tests.reportPath>${phpunit.tests.reportPath}</sonar.php.tests.reportPath>
+        <sonar.php.coverage.reportPaths>${phpunit.coverage.reportPath}</sonar.php.coverage.reportPaths>
 
         <!-- ================================= -->
         <!-- Usine                             -->
@@ -270,23 +290,23 @@
                     <groupId>se.bjurr.gitchangelog</groupId>
                     <artifactId>git-changelog-maven-plugin</artifactId>
                     <version>${git-changelog-maven-plugin.version}</version>
-                            <configuration>
-                                <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
-                                <!-- JIRA -->
-                                <jiraUsername>${jira.username}</jiraUsername>
-                                <jiraPassword>${jira.password}</jiraPassword>
-                                <jiraServer>${usine.url.jira}</jiraServer>
-                                <fromRef>${git-changelog-fromRef}</fromRef>
-                                <toRef>${git-changelog-toRef}</toRef>
-                                <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
-                                <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
-                                <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
-                                <!--<settingsFile>changelog.json</settingsFile>-->
-                                <!--<templateFile>changelog.mustache</templateFile>-->
-                                <!-- A file on filesystem //-->
-                                <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
-                                <templateContent>
-                                    <![CDATA[
+                    <configuration>
+                        <!--<ignoreCommitsOlderThan>2018-01-01 00:00:00</ignoreCommitsOlderThan>-->
+                        <!-- JIRA -->
+                        <jiraUsername>${jira.username}</jiraUsername>
+                        <jiraPassword>${jira.password}</jiraPassword>
+                        <jiraServer>${usine.url.jira}</jiraServer>
+                        <fromRef>${git-changelog-fromRef}</fromRef>
+                        <toRef>${git-changelog-toRef}</toRef>
+                        <jiraIssuePattern>\b[a-zA-Z]([a-zA-Z]+)-([0-9]+)\b</jiraIssuePattern>
+                        <!-- If you have a tag like "git-changelog-maven-plugin-1.5", you can extract "1.5" and use only that as tag name. -->
+                        <!--<readableTagName>${git-changelog-readableTagName}</readableTagName>-->
+                        <!--<settingsFile>changelog.json</settingsFile>-->
+                        <!--<templateFile>changelog.mustache</templateFile>-->
+                        <!-- A file on filesystem //-->
+                        <file>${release-notes.build.dir}/CHANGELOG-${project.version}.md</file>
+                        <templateContent>
+                            <![CDATA[
 # Git Changelog Maven plugin changelog
 
 Changelog of Git Changelog Maven plugin.
@@ -321,9 +341,9 @@ Changelog of Git Changelog Maven plugin.
 {{/tags}}
 
 ]]>
-                                </templateContent>
+                        </templateContent>
 
-                            </configuration>
+                    </configuration>
                 </plugin>
 
                 <!-- ***************************** -->
@@ -389,23 +409,23 @@ Changelog of Git Changelog Maven plugin.
                 </executions>
             </plugin>
             <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
-                <!--<version>${build-helper-maven-plugin.version}</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>timestamp-property</id>-->
-                        <!--<goals>-->
-                            <!--<goal>timestamp-property</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<name>build.time</name>-->
-                            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
-                            <!--<locale>en_US</locale>-->
-                            <!--<timeZone>EST</timeZone>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+            <!--<version>${build-helper-maven-plugin.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>timestamp-property</id>-->
+            <!--<goals>-->
+            <!--<goal>timestamp-property</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<name>build.time</name>-->
+            <!--<pattern>MM/dd/yyyy hh:mm aa</pattern>-->
+            <!--<locale>en_US</locale>-->
+            <!--<timeZone>EST</timeZone>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
             <!-- Build Number -->
@@ -426,6 +446,15 @@ Changelog of Git Changelog Maven plugin.
     </build>
 
     <profiles>
+
+        <!-- Dev Config -->
+        <profile>
+            <id>todir</id>
+            <properties>
+                <packaging.assembly.app.format>dir</packaging.assembly.app.format>
+            </properties>
+        </profile>
+
         <!-- Skip Tests -->
         <profile>
             <id>nodeapp-skipTests</id>
@@ -463,6 +492,120 @@ Changelog of Git Changelog Maven plugin.
                 <phpunit.test.skip>${skipTests}</phpunit.test.skip>
             </properties>
         </profile>
+
+        <!-- PHP -->
+        <!-- Htdocs Composer -->
+        <profile>
+            <id>htdocs-composer</id>
+            <activation>
+                <file>
+                    <exists>./${project.php.dir}/composer.json</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Composer clean -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>htdocs-composer-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${composer.install.skip}</skip>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}/${project.php.dir}/vendor</directory>
+                                        </fileset>
+                                        <!--  <fileset>-->
+                                        <!--     <directory>${project.basedir}/${project.php.dir}</directory>-->
+                                        <!--     <includes><include>composer.lock</include></includes>-->
+                                        <!-- </fileset>-->
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Composer Install  -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>htdocs-composer-install</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${composer.install.skip}</skip>
+                                    <executable>${phpbin}</executable>
+                                    <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
+                                    <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
+                                        --no-progress
+                                    </commandlineArgs>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>htdocs-composer-install-prod</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${composer.install.skip}</skip>
+                                    <executable>${phpbin}</executable>
+                                    <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
+                                    <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
+                                        --no-dev --no-progress
+                                    </commandlineArgs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- PHP Unit -->
+        <profile>
+            <id>phpunit-htdocs</id>
+            <activation>
+                <file>
+                    <exists>./${project.php.dir}/php-unit.xml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>htdocs-phpunit-htdocs-test</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpunit.test.skip}</skip>
+                                    <executable>${phpbin}</executable>
+                                    <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
+                                    <commandlineArgs>${phpunit.bin} -c php-unit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover ${phpunit.coverage.reportPath}</commandlineArgs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
 
         <!-- Sonar -->
         <profile>
