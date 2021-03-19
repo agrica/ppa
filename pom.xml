@@ -6,7 +6,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.0.11-SNAPSHOT</version>
+    <version>3.1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -94,7 +94,9 @@
         <!-- Php -->
         <composer.version>1.7.2</composer.version>
         <composer.run.opts>-d memory_limit=-1</composer.run.opts>
+        <php.home>${env.PHP73_HOME}</php.home>
         <phpbin>${env.PHP73_BINDIR}/php</phpbin>
+
         <phpunit.bin>./vendor/phpunit/phpunit/phpunit</phpunit.bin>
         <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
         <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
@@ -106,6 +108,7 @@
         <gulp.test.skip>false</gulp.test.skip>
         <bower.install.skip>false</bower.install.skip>
         <composer.install.skip>false</composer.install.skip>
+        <composer.lock.clean.skip>true</composer.lock.clean.skip>
         <phpunit.test.skip>false</phpunit.test.skip>
 
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
@@ -516,7 +519,7 @@ Changelog of Git Changelog Maven plugin.
                                     <goal>clean</goal>
                                 </goals>
                                 <configuration>
-                                    <skip>${composer.install.skip}</skip>
+                                    <skip>${composer.lock.clean.skip}</skip>
                                     <filesets>
                                         <fileset>
                                             <directory>${project.basedir}/${project.php.dir}/vendor</directory>
@@ -549,6 +552,10 @@ Changelog of Git Changelog Maven plugin.
                                     <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
                                         --no-progress
                                     </commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbin}</PHP_BIN>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                             <execution>
@@ -564,6 +571,10 @@ Changelog of Git Changelog Maven plugin.
                                     <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
                                         --no-dev --no-progress
                                     </commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbin}</PHP_BIN>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                         </executions>
@@ -598,6 +609,10 @@ Changelog of Git Changelog Maven plugin.
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
                                     <commandlineArgs>${phpunit.bin} -c php-unit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover ${phpunit.coverage.reportPath}</commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbin}</PHP_BIN>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                         </executions>
@@ -784,6 +799,10 @@ Changelog of Git Changelog Maven plugin.
                                     <arguments>
                                         <argument>test</argument>
                                     </arguments>
+                                    <environmentVariables>
+                                        <PHP_HOME>${php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbin}</PHP_BIN>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                         </executions>
