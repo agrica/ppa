@@ -519,15 +519,27 @@ Changelog of Git Changelog Maven plugin.
                                     <goal>clean</goal>
                                 </goals>
                                 <configuration>
-                                    <skip>${composer.lock.clean.skip}</skip>
+                                    <skip>${composer.install.skip}</skip>
                                     <filesets>
                                         <fileset>
                                             <directory>${project.basedir}/${project.php.dir}/vendor</directory>
                                         </fileset>
-                                        <!--  <fileset>-->
-                                        <!--     <directory>${project.basedir}/${project.php.dir}</directory>-->
-                                        <!--     <includes><include>composer.lock</include></includes>-->
-                                        <!-- </fileset>-->
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>htdocs-composer-lock-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${composer.lock.clean.skip}</skip>
+                                    <filesets>
+                                          <fileset>
+                                             <directory>${project.basedir}/${project.php.dir}</directory>
+                                             <includes><include>composer.lock</include></includes>
+                                         </fileset>
                                     </filesets>
                                 </configuration>
                             </execution>
