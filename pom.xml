@@ -167,7 +167,7 @@
         <!-- ================================= -->
         <!-- Tools -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -190,17 +190,18 @@
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
 
         <!-- Generator -->
-        <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version>
+        <!-- GroupId: org.openapitools -->
+        <openapi-generator-maven-plugin.version>5.1.0</openapi-generator-maven-plugin.version>
 
         <!-- Sonar -->
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
 
-        <docker-maven-plugin.fabric8.version>0.33.0</docker-maven-plugin.fabric8.version>
-        <jgitflow-maven-plugin.version>1.0-m5.1</jgitflow-maven-plugin.version>
+        <docker-maven-plugin.fabric8.version>0.35.0</docker-maven-plugin.fabric8.version>
+        <jgitflow-maven-plugin.version>1.0-m8</jgitflow-maven-plugin.version>
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.62</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.69</git-changelog-maven-plugin.version>
 
     </properties>
 
@@ -210,8 +211,17 @@
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
             <plugins>
                 <!-- ************************* -->
+                <!-- Generators                -->
+                <!-- ************************* -->
+                <plugin>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>${openapi-generator-maven-plugin.version}</version>
+                </plugin>
+
+                <!-- ************************* -->
                 <!-- Tools                     -->
-                <!-- ************************ -->
+                <!-- ************************* -->
                 <!-- Release -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -897,17 +907,17 @@ Changelog of Git Changelog Maven plugin.
                 </property>
             </activation>
             <properties>
-                <dist.snapshots.url>https://oss.sonatype.org/content/repositories/snapshots</dist.snapshots.url>
-                <dist.releases.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</dist.releases.url>
+                <dist.snapshots.url>https://s01.oss.sonatype.org/content/repositories/snapshots</dist.snapshots.url>
+                <dist.releases.url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</dist.releases.url>
             </properties>
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
                 <repository>
                     <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
             <build>
@@ -920,7 +930,7 @@ Changelog of Git Changelog Maven plugin.
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
