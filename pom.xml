@@ -577,32 +577,21 @@ Changelog of Git Changelog Maven plugin.
                                         <fileset>
                                             <directory>${project.basedir}/vendor</directory>
                                         </fileset>
-                                    </filesets>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>phpbuild-composer-lock-clean</id>
-                                <phase>clean</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>${phpbuild.install.skip}</skip>
-                                    <filesets>
                                         <fileset>
                                             <directory>${project.basedir}</directory>
                                             <includes><include>composer.lock</include></includes>
                                         </fileset>
                                         <fileset>
                                             <directory>${project.basedir}</directory>
-                                            <includes><include>composer-*.phar</include></includes>
+                                            <includes><include>composer-${phpbuild.composer.version}.phar</include></includes>
                                         </fileset>
                                     </filesets>
                                 </configuration>
                             </execution>
+
                         </executions>
                     </plugin>
-                    <!-- Composer binary -->
+                    <!-- Composer binary copy-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -728,7 +717,7 @@ Changelog of Git Changelog Maven plugin.
                 </property>
             </activation>
             <properties>
-                <>${skipTests}</>
+                <phpunit.test.skip>${skipTests}</phpunit.test.skip>
             </properties>
         </profile>
 
@@ -760,6 +749,10 @@ Changelog of Git Changelog Maven plugin.
                                         <fileset>
                                             <directory>${project.basedir}/${project.php.dir}/vendor</directory>
                                         </fileset>
+                                        <fileset>
+                                            <directory>${project.basedir}/${project.php.dir}</directory>
+                                            <includes><include>composer-${composer.version}.phar</include></includes>
+                                        </fileset>
                                     </filesets>
                                 </configuration>
                             </execution>
@@ -781,7 +774,28 @@ Changelog of Git Changelog Maven plugin.
                             </execution>
                         </executions>
                     </plugin>
-                    <!-- Composer Install  -->
+
+                    <!-- Composer binary copy-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.1.2</version>
+                        <executions>
+                            <execution>
+                                <id>>htdocs-composer-binary-copy</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${composer.install.skip}</skip>
+                                    <artifact>org.composer:composer:${composer.version}:phar</artifact>
+                                    <outputDirectory>${project.basedir}/${project.php.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Htdocs Composer Install  -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
