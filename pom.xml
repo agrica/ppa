@@ -207,7 +207,7 @@
 
         <!-- Generator -->
         <!-- GroupId: org.openapitools -->
-        <openapi-generator-maven-plugin.version>5.1.0</openapi-generator-maven-plugin.version>
+        <openapi-generator-maven-plugin.version>5.1.1</openapi-generator-maven-plugin.version>
 
         <!-- Sonar -->
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
@@ -643,45 +643,6 @@ Changelog of Git Changelog Maven plugin.
             </build>
         </profile>
 
-        <!-- PHP  DOC -->
-        <profile>
-            <id>phpdoc</id>
-            <!--            <activation>-->
-            <!--                <file>-->
-            <!--                    <exists>composer.json</exists>-->
-            <!--                </file>-->
-            <!--            </activation>-->
-            <build>
-                <plugins>
-                    <!-- Pphdoc Generation -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${exec-maven-plugin.version}</version>
-                        <executions>
-                            <!-- Pphdoc Generate -->
-                            <execution>
-                                <id>phpdoc-generate-doc</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>${phpdoc.skip}</skip>
-                                    <executable>${phpbuild.php.bin}</executable>
-                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} -t ${phpdoc.build.directory}
-                                    </commandlineArgs>
-                                    <environmentVariables>
-                                        <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
-                                        <PHP_BIN>${phpbuild.php.bin}</PHP_BIN>
-                                    </environmentVariables>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
         <!-- Skip Tests -->
         <profile>
@@ -883,6 +844,46 @@ Changelog of Git Changelog Maven plugin.
             </build>
         </profile>
 
+
+        <!-- PHP  DOC -->
+        <profile>
+            <id>phpdoc</id>
+            <activation>
+                <file>
+                    <exists>${phpdoc.bin}</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Pphdoc Generation -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <!-- Pphdoc Generate -->
+                            <execution>
+                                <id>phpdoc-generate-doc</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpdoc.skip}</skip>
+                                    <executable>${phpbuild.php.bin}</executable>
+                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} -t ${phpdoc.build.directory}
+                                    </commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbuild.php.bin}</PHP_BIN>
+                                    </environmentVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
         <!-- Sonar -->
         <profile>
