@@ -6,7 +6,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.1.6-SNAPSHOT</version>
+    <version>3.2.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -97,6 +97,19 @@
         <php.home>${env.PHP73_HOME}</php.home>
         <phpbin>${env.PHP73_BINDIR}/php</phpbin>
 
+        <!-- Php Build Tools -->
+        <phpbuild.composer.version>2.0.13</phpbuild.composer.version>
+        <phpbuild.php.home>${env.PHP73_HOME}</phpbuild.php.home>
+        <phpbuild.php.bin>${env.PHP73_BINDIR}/php</phpbuild.php.bin>
+        <phpbuild.composer.bin>${project.basedir}/composer-${phpbuild.composer.version}.phar</phpbuild.composer.bin>
+        <phpbuild.composer.run.opts>${composer.run.opts}</phpbuild.composer.run.opts>
+
+        <!-- Php Doc -->
+        <phpdoc.bin>vendor/phpdocumentor/phpdocumentor/bin/phpdoc</phpdoc.bin>
+        <phpdoc.build.directory>${project.build.directory}/phpdoc-generated</phpdoc.build.directory>
+        <phpdoc.opts>-d ${project.basedir}/${project.php.dir} --ignore "${sonar.exclusions}"</phpdoc.opts>
+
+        <!-- Php Unit -->
         <phpunit.bin>./vendor/phpunit/phpunit/phpunit</phpunit.bin>
         <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
         <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
@@ -109,6 +122,8 @@
         <bower.install.skip>false</bower.install.skip>
         <composer.install.skip>false</composer.install.skip>
         <composer.lock.clean.skip>true</composer.lock.clean.skip>
+        <phpbuild.install.skip>false</phpbuild.install.skip>
+        <phpdoc.skip>false</phpdoc.skip>
         <phpunit.test.skip>false</phpunit.test.skip>
 
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
@@ -135,6 +150,7 @@
 
         <!-- Sonar -->
         <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <sonar.exclusions></sonar.exclusions>
         <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
         <sonar.php.tests.reportPath>${phpunit.tests.reportPath}</sonar.php.tests.reportPath>
         <sonar.php.coverage.reportPaths>${phpunit.coverage.reportPath}</sonar.php.coverage.reportPaths>
@@ -468,6 +484,216 @@ Changelog of Git Changelog Maven plugin.
             </properties>
         </profile>
 
+        <!-- Npm Install -->
+        <profile>
+            <id>yarn-install</id>
+            <activation>
+                <file>
+                    <exists>package.json</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>yarn-install</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${yarn.install.skip}</skip>
+                                    <executable>yarn</executable>
+                                    <arguments>
+                                        <argument>install</argument>
+                                    </arguments>
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Clean node module -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>yarn-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${yarn.install.skip}</skip>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>node_modules</directory>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>.</directory>
+                                            <includes>
+                                                <include>package-lock.json</include>
+                                                <include>yarn.lock</include>
+                                                <include>yarn-error.log</include>
+                                            </includes>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- PHP  Build Tools -->
+        <profile>
+            <id>phpbuild-install</id>
+            <activation>
+                <file>
+                    <exists>composer.json</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Php Build Clean -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>phpbuild-composer-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpbuild.install.skip}</skip>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}/vendor</directory>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>phpbuild-composer-lock-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpbuild.install.skip}</skip>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${project.basedir}</directory>
+                                            <includes><include>composer.lock</include></includes>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${project.basedir}</directory>
+                                            <includes><include>composer-*.phar</include></includes>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Composer binary -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.1.2</version>
+                        <executions>
+                            <execution>
+                                <id>phpbuild-composer-binary-copy</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpbuild.install.skip}</skip>
+                                    <artifact>org.composer:composer:${phpbuild.composer.version}:phar</artifact>
+                                    <outputDirectory>${project.basedir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Php Build Composer Install -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>phpbuild-composer-install</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpbuild.install.skip}</skip>
+                                    <executable>${phpbuild.php.bin}</executable>
+<!--                                    <workingDirectory>${project.basedir}</workingDirectory>-->
+<!--                                    <commandlineArgs>${phpbuild.composer.run.opts} ${phpbuild.composer.bin} install &#45;&#45;no-progress -v</commandlineArgs>-->
+                                    <workingDirectory>${project.basedir}</workingDirectory>
+                                    <commandlineArgs>${composer.run.opts} ${phpbuild.composer.bin} install -d ${project.basedir} --no-progress --no-interaction</commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbuild.php.bin}</PHP_BIN>
+                                    </environmentVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- PHP  DOC -->
+        <profile>
+            <id>phpdoc</id>
+            <!--            <activation>-->
+            <!--                <file>-->
+            <!--                    <exists>composer.json</exists>-->
+            <!--                </file>-->
+            <!--            </activation>-->
+            <build>
+                <plugins>
+                    <!-- Pphdoc Generation -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <!-- Pphdoc Generate -->
+                            <execution>
+                                <id>phpdoc-generate-doc</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpdoc.skip}</skip>
+                                    <executable>${phpbuild.php.bin}</executable>
+                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} -t ${phpdoc.build.directory}
+                                    </commandlineArgs>
+                                    <environmentVariables>
+                                        <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
+                                        <PHP_BIN>${phpbuild.php.bin}</PHP_BIN>
+                                    </environmentVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
         <!-- Skip Tests -->
         <profile>
             <id>nodeapp-skipTests</id>
@@ -502,7 +728,7 @@ Changelog of Git Changelog Maven plugin.
                 </property>
             </activation>
             <properties>
-                <phpunit.test.skip>${skipTests}</phpunit.test.skip>
+                <>${skipTests}</>
             </properties>
         </profile>
 
@@ -665,71 +891,6 @@ Changelog of Git Changelog Maven plugin.
         </profile>
 
 
-        <!-- Npm Install -->
-        <profile>
-            <id>yarn-install</id>
-            <activation>
-                <file>
-                    <exists>package.json</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>${exec-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>yarn-install</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>${yarn.install.skip}</skip>
-                                    <executable>yarn</executable>
-                                    <arguments>
-                                        <argument>install</argument>
-                                    </arguments>
-                                    <workingDirectory>${project.basedir}</workingDirectory>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Clean node module -->
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>${maven-clean-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>yarn-clean</id>
-                                <phase>clean</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>${yarn.install.skip}</skip>
-                                    <filesets>
-                                        <fileset>
-                                            <directory>node_modules</directory>
-                                        </fileset>
-                                        <fileset>
-                                            <directory>.</directory>
-                                            <includes>
-                                                <include>package-lock.json</include>
-                                                <include>yarn.lock</include>
-                                                <include>yarn-error.log</include>
-                                            </includes>
-                                        </fileset>
-                                    </filesets>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
 
         <!-- Bower Install -->
