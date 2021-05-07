@@ -107,6 +107,7 @@
         <!-- Php Doc -->
         <phpdoc.bin>vendor/phpdocumentor/phpdocumentor/bin/phpdoc</phpdoc.bin>
         <phpdoc.build.directory>${project.build.directory}/phpdoc-generated</phpdoc.build.directory>
+        <phpdoc.title>${project.name} - ${project.version}</phpdoc.title>
         <phpdoc.opts>-d ${project.basedir}/${project.php.dir} --ignore "${sonar.exclusions}"</phpdoc.opts>
 
         <!-- Php Unit -->
@@ -871,7 +872,7 @@ Changelog of Git Changelog Maven plugin.
                                 <configuration>
                                     <skip>${phpdoc.skip}</skip>
                                     <executable>${phpbuild.php.bin}</executable>
-                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} -t ${phpdoc.build.directory}
+                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} --title "${phpdoc.title}" -t ${phpdoc.build.directory}
                                     </commandlineArgs>
                                     <environmentVariables>
                                         <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
