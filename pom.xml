@@ -94,6 +94,7 @@
         <!-- Php -->
         <composer.version>1.7.2</composer.version>
         <composer.run.opts>-d memory_limit=-1</composer.run.opts>
+        <composer.bin.dir>${project.build.directory}/htdocs-composer-bin</composer.bin.dir>
         <php.home>${env.PHP73_HOME}</php.home>
         <phpbin>${env.PHP73_BINDIR}/php</phpbin>
 
@@ -105,7 +106,8 @@
         <phpbuild.composer.run.opts>${composer.run.opts}</phpbuild.composer.run.opts>
 
         <!-- Php Doc -->
-        <phpdoc.bin>vendor/phpdocumentor/phpdocumentor/bin/phpdoc</phpdoc.bin>
+        <phpdoc.version>3.0.0</phpdoc.version>
+        <phpdoc.bin.dir>${project.build.directory}/phpdoc-bin</phpdoc.bin.dir>
         <phpdoc.build.directory>${project.build.directory}/phpdoc-generated</phpdoc.build.directory>
         <phpdoc.title>${project.name} - ${project.version}</phpdoc.title>
         <phpdoc.opts>-d ${project.basedir}/${project.php.dir} --ignore "${sonar.exclusions}"</phpdoc.opts>
@@ -184,6 +186,7 @@
         <!-- ================================= -->
         <!-- Tools -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
@@ -208,7 +211,7 @@
 
         <!-- Generator -->
         <!-- GroupId: org.openapitools -->
-        <openapi-generator-maven-plugin.version>5.1.1</openapi-generator-maven-plugin.version>
+        <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version><!-- 5.1.1 -->
 
         <!-- Sonar -->
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
@@ -596,7 +599,7 @@ Changelog of Git Changelog Maven plugin.
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.1.2</version>
+                        <version>${maven-dependency-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>phpbuild-composer-binary-copy</id>
@@ -741,7 +744,7 @@ Changelog of Git Changelog Maven plugin.
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.1.2</version>
+                        <version>${maven-dependency-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>>htdocs-composer-binary-copy</id>
@@ -851,11 +854,54 @@ Changelog of Git Changelog Maven plugin.
             <id>phpdoc</id>
             <activation>
                 <file>
-                    <exists>${phpdoc.bin}</exists>
+                    <exists>phpdoc.xml</exists>
                 </file>
             </activation>
             <build>
                 <plugins>
+                    <!-- Phpdoc clean -->
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>phpdoc-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpdoc.skip}</skip>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${phpdoc.bin.dir}</directory>
+                                            <includes><include>phpdoc-${phpdoc.version}.phar</include></includes>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- Phpdoc binary copy-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven-dependency-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>>phpdoc-binary-copy</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${phpdoc.skip}</skip>
+                                    <artifact>org.phpdoc:phpdoc:${phpdoc.version}:phar</artifact>
+                                    <outputDirectory>${phpdoc.bin.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <!-- Pphdoc Generation -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -872,7 +918,7 @@ Changelog of Git Changelog Maven plugin.
                                 <configuration>
                                     <skip>${phpdoc.skip}</skip>
                                     <executable>${phpbuild.php.bin}</executable>
-                                    <commandlineArgs>${phpdoc.bin} ${phpdoc.opts} --title "${phpdoc.title}" -t ${phpdoc.build.directory}
+                                    <commandlineArgs>${phpdoc.bin.dir}/phpdoc-${phpdoc.version}.phar ${phpdoc.opts} --title "${phpdoc.title}" -t ${phpdoc.build.directory}
                                     </commandlineArgs>
                                     <environmentVariables>
                                         <PHP_HOME>${phpbuild.php.home}</PHP_HOME>
