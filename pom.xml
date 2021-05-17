@@ -102,7 +102,8 @@
         <phpbuild.composer.version>2.0.13</phpbuild.composer.version>
         <phpbuild.php.home>${env.PHP73_HOME}</phpbuild.php.home>
         <phpbuild.php.bin>${env.PHP73_BINDIR}/php</phpbuild.php.bin>
-        <phpbuild.composer.bin>${project.basedir}/composer-${phpbuild.composer.version}.phar</phpbuild.composer.bin>
+        <phpbuild.composer.bin.dir>${project.build.directory}/phpbuild-composer-bin</phpbuild.composer.bin.dir>
+        <phpbuild.composer.bin>${phpbuild.composer.bin.dir}/composer-${phpbuild.composer.version}.phar</phpbuild.composer.bin>
         <phpbuild.composer.run.opts>${composer.run.opts}</phpbuild.composer.run.opts>
 
         <!-- Php Doc -->
@@ -586,7 +587,7 @@ Changelog of Git Changelog Maven plugin.
                                             <includes><include>composer.lock</include></includes>
                                         </fileset>
                                         <fileset>
-                                            <directory>${project.basedir}</directory>
+                                            <directory>${phpbuild.composer.bin.dir}</directory>
                                             <includes><include>composer-${phpbuild.composer.version}.phar</include></includes>
                                         </fileset>
                                     </filesets>
@@ -610,7 +611,7 @@ Changelog of Git Changelog Maven plugin.
                                 <configuration>
                                     <skip>${phpbuild.install.skip}</skip>
                                     <artifact>org.composer:composer:${phpbuild.composer.version}:phar</artifact>
-                                    <outputDirectory>${project.basedir}</outputDirectory>
+                                    <outputDirectory>${phpbuild.composer.bin.dir}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -715,7 +716,7 @@ Changelog of Git Changelog Maven plugin.
                                             <directory>${project.basedir}/${project.php.dir}/vendor</directory>
                                         </fileset>
                                         <fileset>
-                                            <directory>${project.basedir}/${project.php.dir}</directory>
+                                            <directory>${composer.bin.dir}</directory>
                                             <includes><include>composer-${composer.version}.phar</include></includes>
                                         </fileset>
                                     </filesets>
@@ -755,7 +756,7 @@ Changelog of Git Changelog Maven plugin.
                                 <configuration>
                                     <skip>${composer.install.skip}</skip>
                                     <artifact>org.composer:composer:${composer.version}:phar</artifact>
-                                    <outputDirectory>${project.basedir}/${project.php.dir}</outputDirectory>
+                                    <outputDirectory>${composer.bin.dir}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -776,7 +777,7 @@ Changelog of Git Changelog Maven plugin.
                                     <skip>${composer.install.skip}</skip>
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
-                                    <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
+                                    <commandlineArgs>${composer.run.opts} ${composer.bin.dir}/composer-${composer.version}.phar install
                                         --no-progress
                                     </commandlineArgs>
                                     <environmentVariables>
@@ -795,7 +796,7 @@ Changelog of Git Changelog Maven plugin.
                                     <skip>${composer.install.skip}</skip>
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
-                                    <commandlineArgs>${composer.run.opts} composer-${composer.version}.phar install
+                                    <commandlineArgs>${composer.run.opts} ${composer.bin.dir}/composer-${composer.version}.phar install
                                         --no-dev --no-progress
                                     </commandlineArgs>
                                     <environmentVariables>
