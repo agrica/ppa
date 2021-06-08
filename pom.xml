@@ -122,6 +122,7 @@
         <!-- Build JOB configuration           -->
         <!-- ================================= -->
         <yarn.install.skip>false</yarn.install.skip>
+        <yarn.lock.clean.skip>false</yarn.lock.clean.skip>
         <gulp.test.skip>false</gulp.test.skip>
         <bower.install.skip>false</bower.install.skip>
         <composer.install.skip>false</composer.install.skip>
@@ -538,6 +539,18 @@ Changelog of Git Changelog Maven plugin.
                                         <fileset>
                                             <directory>node_modules</directory>
                                         </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>yarn-lock-clean</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${yarn.lock.clean.skip}</skip>
+                                    <filesets>
                                         <fileset>
                                             <directory>.</directory>
                                             <includes>
