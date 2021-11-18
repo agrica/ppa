@@ -829,7 +829,7 @@ Changelog of Git Changelog Maven plugin.
             <id>phpunit-htdocs</id>
             <activation>
                 <file>
-                    <exists>./${project.php.dir}/php-unit.xml</exists>
+                    <exists>./${project.php.dir}/phpunit.xml</exists>
                 </file>
             </activation>
             <build>
@@ -849,7 +849,7 @@ Changelog of Git Changelog Maven plugin.
                                     <skip>${phpunit.test.skip}</skip>
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
-                                    <commandlineArgs>${phpunit.bin} -c php-unit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover ${phpunit.coverage.reportPath}</commandlineArgs>
+                                    <commandlineArgs>${phpunit.bin} -c phpunit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover ${phpunit.coverage.reportPath}</commandlineArgs>
                                     <environmentVariables>
                                         <PHP_HOME>${php.home}</PHP_HOME>
                                         <PHP_BIN>${phpbin}</PHP_BIN>
