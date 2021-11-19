@@ -30,3 +30,27 @@ mvn versions:display-dependency-updates
 ```
 mvn -B release:prepare release:perform -DreleaseVersion=0.2.10-M1 -DdevelopmentVersion=0.2.10-SNAPSHOT
 ```
+
+
+# Update Sign certificat
+https://github-wiki-see.page/m/cristal-ise/kernel/wiki/Maven-Deploy-Travis-GPG2
+
+## génération des clefs
+
+```bash
+# généraion des clef
+gpg --gen-key
+```
+
+# Export des clefs
+
+```bash
+## to find the env GPG_KEYNAME=keyid or keyname
+gpg --list-secret-keys
+
+## Export for varaible
+## GPG_SECRET_KEYS =
+gpg -a --export-secret-keys <keyid> | base64
+## GPG_OWNERTRUST =
+gpg --export-ownertrust | base64
+```
