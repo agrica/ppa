@@ -2,7 +2,7 @@ POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=
 ========
 
 ## Usine
-* Travis: https://travis-ci.com/agrica/ppa
+* Travis: https://app.travis-ci.com/github/agrica/ppa
 * Repo Mondial: https://repo1.maven.org/maven2/io/github/agrica/ppa/
 
 # Maven command
