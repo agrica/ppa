@@ -54,3 +54,9 @@ gpg -a --export-secret-keys <keyid> | base64
 ## GPG_OWNERTRUST =
 gpg --export-ownertrust | base64
 ```
+
+# Enregistrements es clef mondials
+```bash
+gpg --armor --export agrica-socle-sign
+```
+A sasir dans l'IHM https://keyserver.ubuntu.com/pks/add
