@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 VERSION=${1:-0.0.1-SNAPSHOT}
 if [[ -z "${VERSION}" ]]; then
@@ -9,7 +9,7 @@ echo "1- Create branch 'prepare-release'"
 git co -b prepare-release
 
 echo "2- Set Maven Version $VERSION"
-mvn  org.codehaus.mojo:versions-maven-plugin:2.8.1:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+mvn  org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnewVersion=$VERSION && exit 0
 echo "  versions:set $VERSION  ==> exit code $?"
 mvn clean install
 git commit -am "Prépare Release version $VERSION"
@@ -27,6 +27,6 @@ echo "5- Merge with 'master'"
 git merge ossrh-$VERSION
 
 echo "6- Increment Version 'master'"
-mvn org.codehaus.mojo:versions-maven-plugin:2.8.1:set -DgenerateBackupPoms=false -DnextSnapshot=true
+mvn org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnextSnapshot=true
 git commit -am "Prepare Next Snapshot"
 git push origin master
