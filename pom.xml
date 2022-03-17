@@ -92,14 +92,14 @@
         <project.php.dir>sources/htdocs</project.php.dir>
 
         <!-- Php -->
-        <composer.version>1.7.2</composer.version>
+        <composer.version>1.7.2</composer.version><!-- 2.2.7 -->
         <composer.run.opts>-d memory_limit=-1</composer.run.opts>
         <composer.bin.dir>${project.build.directory}/htdocs-composer-bin</composer.bin.dir>
-        <php.home>${env.PHP73_HOME}</php.home>
-        <phpbin>${env.PHP73_BINDIR}/php</phpbin>
+        <php.home>${env.PHP71_HOME}</php.home>
+        <phpbin>${env.PHP71_BINDIR}/php</phpbin>
 
         <!-- Php Build Tools -->
-        <phpbuild.composer.version>2.0.13</phpbuild.composer.version>
+        <phpbuild.composer.version>${composer.version}</phpbuild.composer.version>
         <phpbuild.php.home>${env.PHP73_HOME}</phpbuild.php.home>
         <phpbuild.php.bin>${env.PHP73_BINDIR}/php</phpbuild.php.bin>
         <phpbuild.composer.bin.dir>${project.build.directory}/phpbuild-composer-bin</phpbuild.composer.bin.dir>
@@ -441,6 +441,12 @@ Changelog of Git Changelog Maven plugin.
                             <offset>-2</offset>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <!--<plugin>-->
@@ -664,19 +670,20 @@ Changelog of Git Changelog Maven plugin.
 
         <!-- Skip Tests -->
         <profile>
-            <id>nodeapp-skipTests</id>
+            <id>deps-skipTests</id>
             <activation>
                 <property>
                     <name>skipTests</name>
                 </property>
             </activation>
             <properties>
-                <gulp.test.skip>${skipTests}</gulp.test.skip>
+                <gulp.test.skip>true</gulp.test.skip>
+                <phpunit.test.skip>true</phpunit.test.skip>
             </properties>
         </profile>
 
         <profile>
-            <id>nodeapp-maven.test.skip</id>
+            <id>deps-maven.test.skip</id>
             <activation>
                 <property>
                     <name>maven.test.skip</name>
@@ -684,19 +691,33 @@ Changelog of Git Changelog Maven plugin.
                 </property>
             </activation>
             <properties>
-                <gulp.test.skip>${maven.test.skip}</gulp.test.skip>
+                <gulp.test.skip>true</gulp.test.skip>
+                <phpunit.test.skip>true</phpunit.test.skip>
             </properties>
         </profile>
 
         <profile>
-            <id>phpunit-skipTests</id>
+            <id>deps-skipDocs</id>
             <activation>
                 <property>
-                    <name>skipTests</name>
+                    <name>skipDocs</name>
                 </property>
             </activation>
             <properties>
-                <phpunit.test.skip>${skipTests}</phpunit.test.skip>
+                <phpdoc.skip>true</phpdoc.skip>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>deps-maven.doc.skip</id>
+            <activation>
+                <property>
+                    <name>maven.doc.skip</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <phpdoc.skip>true</phpdoc.skip>
             </properties>
         </profile>
 
