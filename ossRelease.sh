@@ -9,8 +9,7 @@ echo "1- Create branch 'prepare-release'"
 git co -b prepare-release
 
 echo "2- Set Maven Version $VERSION"
-mvn  org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnewVersion=$VERSION && exit 0
-echo "  versions:set $VERSION  ==> exit code $?"
+mvn  org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnewVersion=$VERSION || echo "  versions:set $VERSION  ==> exit code $?"
 mvn clean install
 git commit -am "Prépare Release version $VERSION"
 
