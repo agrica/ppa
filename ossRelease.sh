@@ -1,12 +1,16 @@
-#!/bin/bash -e
+#!/bin/bash
 
 VERSION=${1:-0.0.1-SNAPSHOT}
+if [[ -z "${VERSION}" ]]; then
+    read -p "Version à releaser ? " VERSION
+fi
 
 echo "1- Create branch 'prepare-release'"
 git co -b prepare-release
 
 echo "2- Set Maven Version $VERSION"
-mvn versions:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+mvn  org.codehaus.mojo:versions-maven-plugin:2.8.1:set -DgenerateBackupPoms=false -DnewVersion=$VERSION
+echo "  versions:set $VERSION  ==> exit code $?"
 mvn clean install
 git commit -am "Prépare Release version $VERSION"
 
