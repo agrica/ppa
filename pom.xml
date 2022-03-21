@@ -188,28 +188,28 @@
         <!-- ================================= -->
         <!-- Tools -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-        <maven-dependency-plugin.version>3.1.2</maven-dependency-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version> <!-- 3.0.0-M5 -->
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version> <!-- 3.0.0-M5 -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.3.2</maven-javadoc-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
-        <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
-        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version> <!-- 3.0.0-M1 -->
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <nexus-staging-maven-plugin.version>1.6.12</nexus-staging-maven-plugin.version>
+        <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
+        <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version>
 
         <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
         <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version> <!-- 3.0.0 -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
-        <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version> <!-- 1.12 -->
+        <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version> <!-- 1.12 -->
 
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
-        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+        <buildnumber-maven-plugin.version>3.3.0</buildnumber-maven-plugin.version>
 
         <!-- Generator -->
         <!-- GroupId: org.openapitools -->
@@ -218,12 +218,12 @@
         <!-- Sonar -->
         <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
 
-        <docker-maven-plugin.fabric8.version>0.38.0</docker-maven-plugin.fabric8.version>
+        <docker-maven-plugin.fabric8.version>0.39.1</docker-maven-plugin.fabric8.version>
         <jgitflow-maven-plugin.version>1.0-m8</jgitflow-maven-plugin.version>
 
         <!-- Changelog -->
         <gitlog-maven-plugin.version>1.13.17</gitlog-maven-plugin.version>
-        <git-changelog-maven-plugin.version>1.78</git-changelog-maven-plugin.version>
+        <git-changelog-maven-plugin.version>1.88</git-changelog-maven-plugin.version>
 
     </properties>
 
