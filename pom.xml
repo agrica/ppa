@@ -6,7 +6,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.2.6</version>
+    <version>3.2.7-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
