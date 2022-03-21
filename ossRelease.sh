@@ -26,6 +26,6 @@ echo "5- Merge with 'master'"
 git merge ossrh-$VERSION
 
 echo "6- Increment Version 'master'"
-mvn org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnextSnapshot=true
+mvn org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnextSnapshot=true || echo "  versions:set $VERSION  ==> exit code $?"
 git commit -am "Prepare Next Snapshot"
 git push origin master

@@ -209,7 +209,7 @@
 
         <maven-antrun-plugin.version>3.0.0</maven-antrun-plugin.version>
         <ant-contrib.version>1.0b3</ant-contrib.version>
-        <buildnumber-maven-plugin.version>3.3.0</buildnumber-maven-plugin.version>
+        <buildnumber-maven-plugin.version>3.0.0</buildnumber-maven-plugin.version>
 
         <!-- Generator -->
         <!-- GroupId: org.openapitools -->
