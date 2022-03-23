@@ -87,7 +87,7 @@
         <packaging.assembly.app.format>tar.gz</packaging.assembly.app.format>
 
         <!-- ================================= -->
-        <!-- Build Project configuration           -->
+        <!-- Build Project configuration       -->
         <!-- ================================= -->
         <project.php.dir>sources/htdocs</project.php.dir>
 
@@ -98,10 +98,20 @@
         <php.home>${env.PHP71_HOME}</php.home>
         <phpbin>${env.PHP71_BINDIR}/php</phpbin>
 
-        <!-- Php Build Tools -->
-        <phpbuild.composer.version>${composer.version}</phpbuild.composer.version>
+        <!-- ================================= -->
+        <!--           Php Build Tools         -->
+        <!-- ================================= -->
         <phpbuild.php.home>${env.PHP73_HOME}</phpbuild.php.home>
         <phpbuild.php.bin>${env.PHP73_BINDIR}/php</phpbuild.php.bin>
+
+        <!-- PHP Code Sniffer -->
+        <codesniffer.version>3.6.2</codesniffer.version>
+        <phpbuild.codesniffer.version>${codesniffer.version}</phpbuild.codesniffer.version>
+        <phpbuild.codesniffer.bin.dir>${project.build.directory}/phpbuild-codesniffer-bin</phpbuild.codesniffer.bin.dir>
+        <phpbuild.codesniffer.phpcs.bin>${phpbuild.codesniffer.bin.dir}/codesniffer-${phpbuild.codesniffer.version}-phpcs.phar</phpbuild.codesniffer.phpcs.bin>
+
+        <!-- PHP Composer -->
+        <phpbuild.composer.version>${composer.version}</phpbuild.composer.version>
         <phpbuild.composer.bin.dir>${project.build.directory}/phpbuild-composer-bin</phpbuild.composer.bin.dir>
         <phpbuild.composer.bin>${phpbuild.composer.bin.dir}/composer-${phpbuild.composer.version}.phar</phpbuild.composer.bin>
         <phpbuild.composer.run.opts>${composer.run.opts}</phpbuild.composer.run.opts>
@@ -130,6 +140,7 @@
         <phpbuild.install.skip>false</phpbuild.install.skip>
         <phpdoc.skip>false</phpdoc.skip>
         <phpunit.test.skip>false</phpunit.test.skip>
+        <codesniffer.test.skip>true</codesniffer.test.skip>
 
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss 'GMT'</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
@@ -574,6 +585,40 @@ Changelog of Git Changelog Maven plugin.
             </build>
         </profile>
 
+        <!-- PHP CodeSniffer -->
+        <profile>
+            <id>phpbuild-codesniffer</id>
+            <activation>
+                <property>
+                    <name>codesniffer.test.skip</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Composer binary copy-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven-dependency-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>phpbuild-codesniffer-binary-copy</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${codesniffer.test.skip}</skip>
+                                    <artifact>io.squizlabs.codesniffer:codesniffer:${phpbuild.codesniffer.version}:phar:phpcs</artifact>
+                                    <outputDirectory>${phpbuild.codesniffer.bin.dir}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <!-- PHP  Build Tools -->
         <profile>
             <id>phpbuild-install</id>
@@ -681,6 +726,18 @@ Changelog of Git Changelog Maven plugin.
                 <phpunit.test.skip>true</phpunit.test.skip>
             </properties>
         </profile>
+        <profile>
+            <id>deps-skipComposer</id>
+            <activation>
+                <property>
+                    <name>skipComposer</name>
+                </property>
+            </activation>
+            <properties>
+                <composer.install.skip>true</composer.install.skip>
+            </properties>
+        </profile>
+
 
         <profile>
             <id>deps-maven.test.skip</id>
@@ -879,6 +936,7 @@ Changelog of Git Changelog Maven plugin.
                                     <environmentVariables>
                                         <PHP_HOME>${php.home}</PHP_HOME>
                                         <PHP_BIN>${phpbin}</PHP_BIN>
+                                        <CODESNIFFER_PHPS_BIN>${phpbuild.codesniffer.phpcs.bin}</CODESNIFFER_PHPS_BIN>
                                     </environmentVariables>
                                 </configuration>
                             </execution>
