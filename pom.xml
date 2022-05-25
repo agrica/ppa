@@ -784,7 +784,7 @@ Changelog of Git Changelog Maven plugin.
             <id>htdocs-composer</id>
             <activation>
                 <file>
-                    <exists>./${project.php.dir}/composer.json</exists>
+                    <exists>./sources/htdocs/composer.json</exists>
                 </file>
             </activation>
             <build>
@@ -952,7 +952,7 @@ Changelog of Git Changelog Maven plugin.
             <id>phpunit-htdocs</id>
             <activation>
                 <file>
-                    <exists>./${project.php.dir}/phpunit.xml</exists>
+                    <exists>./sources/htdocs/phpunit.xml</exists>
                 </file>
             </activation>
             <build>
@@ -1299,4 +1299,4 @@ Changelog of Git Changelog Maven plugin.
 
     </profiles>
 </project>
-	
+
