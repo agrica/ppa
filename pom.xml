@@ -6,7 +6,7 @@
     <!-- Identification du projet -->
     <groupId>io.github.agrica</groupId>
     <artifactId>ppa</artifactId>
-    <version>3.2.9-SNAPSHOT</version>
+    <version>3.2.9</version>
 
     <packaging>pom</packaging>
 
@@ -127,6 +127,8 @@
         <phpunit.bin>./vendor/phpunit/phpunit/phpunit</phpunit.bin>
         <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
         <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
+        <phpunit.coverage.reportHtmlPath>${project.build.directory}/phpunit-coverage-html</phpunit.coverage.reportHtmlPath>
+        <phpunit.simpletest.browserOutputDirectory>${project.build.directory}/simpletest/browser_output</phpunit.simpletest.browserOutputDirectory>
 
         <!-- ================================= -->
         <!-- Build JOB configuration           -->
@@ -972,10 +974,12 @@ Changelog of Git Changelog Maven plugin.
                                     <skip>${phpunit.test.skip}</skip>
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
-                                    <commandlineArgs>${phpunit.bin} -c phpunit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover ${phpunit.coverage.reportPath}</commandlineArgs>
+                                    <commandlineArgs>${phpunit.bin} -c phpunit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover=${phpunit.coverage.reportPath}  --coverage-html=${phpunit.coverage.reportHtmlPath}</commandlineArgs>
                                     <environmentVariables>
                                         <PHP_HOME>${php.home}</PHP_HOME>
                                         <PHP_BIN>${phpbin}</PHP_BIN>
+                                        <XDEBUG_MODE>coverage</XDEBUG_MODE>
+                                        <BROWSERTEST_OUTPUT_DIRECTORY>${phpunit.simpletest.browserOutputDirectory}</BROWSERTEST_OUTPUT_DIRECTORY>
                                     </environmentVariables>
                                 </configuration>
                             </execution>
