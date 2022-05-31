@@ -128,7 +128,6 @@
         <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
         <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
         <phpunit.coverage.reportHtmlPath>${project.build.directory}/phpunit-coverage-html</phpunit.coverage.reportHtmlPath>
-        <phpunit.simpletest.browserOutputDirectory>${project.build.directory}/simpletest/browser_output</phpunit.simpletest.browserOutputDirectory>
 
         <!-- ================================= -->
         <!-- Build JOB configuration           -->
@@ -979,7 +978,6 @@ Changelog of Git Changelog Maven plugin.
                                         <PHP_HOME>${php.home}</PHP_HOME>
                                         <PHP_BIN>${phpbin}</PHP_BIN>
                                         <XDEBUG_MODE>coverage</XDEBUG_MODE>
-                                        <BROWSERTEST_OUTPUT_DIRECTORY>${phpunit.simpletest.browserOutputDirectory}</BROWSERTEST_OUTPUT_DIRECTORY>
                                     </environmentVariables>
                                 </configuration>
                             </execution>
