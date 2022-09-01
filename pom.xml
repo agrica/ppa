@@ -47,11 +47,6 @@
 
     <developers>
         <developer>
-            <name>Vincent Dupain</name>
-            <email>vdupain@gmail.com</email>
-            <organizationUrl>https://www.groupagrica.com/</organizationUrl>
-        </developer>
-        <developer>
             <name>Jerome Morille</name>
             <email>morille.jerome@groupagrica.com</email>
             <organizationUrl>https://www.groupagrica.com/</organizationUrl>
@@ -92,7 +87,7 @@
         <project.php.dir>sources/htdocs</project.php.dir>
 
         <!-- Php -->
-        <composer.version>1.7.2</composer.version><!-- 2.2.7 -->
+        <composer.version>2.2.7</composer.version><!-- 2.2.7 -->
         <composer.run.opts>-d memory_limit=-1</composer.run.opts>
         <composer.bin.dir>${project.build.directory}/htdocs-composer-bin</composer.bin.dir>
         <php.home>${env.PHP71_HOME}</php.home>
@@ -165,13 +160,6 @@
         <!-- Les options a passer a la commande forkee de maven pour les tests -->
         <!--<surefire.argLine>${env.MAVEN_OPTS}</surefire.argLine>-->
 
-        <!-- Sonar -->
-        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
-        <sonar.exclusions></sonar.exclusions>
-        <sonar.host.url>http://sonar.agrica.loc</sonar.host.url>
-        <sonar.php.tests.reportPath>${phpunit.tests.reportPath}</sonar.php.tests.reportPath>
-        <sonar.php.coverage.reportPaths>${phpunit.coverage.reportPath}</sonar.php.coverage.reportPaths>
-
         <!-- ================================= -->
         <!-- Usine                             -->
         <!-- ================================= -->
@@ -185,7 +173,16 @@
         <usine.url.sources.svn-groupe>http://lima/svn</usine.url.sources.svn-groupe>
         <usine.url.ci.jenkins>http://jenkins</usine.url.ci.jenkins>
         <usine.url.ci>${usine.url.ci.jenkins}</usine.url.ci>
-        <usine.url.sonar>http://sonar</usine.url.sonar>
+        <usine.url.sonar>http://sonar.agrica.loc</usine.url.sonar>
+
+        <!-- Sonar -->
+        <sonar.sources>${project.build.sourceDirectory}</sonar.sources>
+        <sonar.exclusions></sonar.exclusions>
+        <sonar.host.url>${usine.url.sonar}</sonar.host.url>
+        <sonar.php.tests.reportPath>${phpunit.tests.reportPath}</sonar.php.tests.reportPath>
+        <sonar.php.coverage.reportPaths>${phpunit.coverage.reportPath}</sonar.php.coverage.reportPaths>
+
+
 
         <!-- ================================= -->
         <!-- Parametrage buildnumber           -->
@@ -228,7 +225,7 @@
         <openapi-generator-maven-plugin.version>4.3.1</openapi-generator-maven-plugin.version><!-- 5.1.1 -->
 
         <!-- Sonar -->
-        <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version> <!-- 3.4.0.905 -->
+        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version> <!-- 3.7.0.1746 -->
 
         <docker-maven-plugin.fabric8.version>0.39.1</docker-maven-plugin.fabric8.version>
         <jgitflow-maven-plugin.version>1.0-m8</jgitflow-maven-plugin.version>
