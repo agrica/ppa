@@ -199,6 +199,7 @@
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
         <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-enforcer-plugin>3.1.0</maven-enforcer-plugin>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version> <!-- 3.0.0-M5 -->
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version> <!-- 3.0.0-M5 -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -241,6 +242,29 @@
         <pluginManagement>
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
             <plugins>
+                <!-- ************************* -->
+                <!-- Enforcers                 -->
+                <!-- ************************* -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-maven</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>${maven.version}</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- ************************* -->
                 <!-- Generators                -->
                 <!-- ************************* -->
