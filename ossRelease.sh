@@ -10,7 +10,7 @@ echo "1- Create branch 'prepare-release'"
 git co -b prepare-release
 
 echo "2- Set Maven Version $VERSION"
-mvn  org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnewVersion=$VERSION || echo "  versions:set $VERSION  ==> exit code $?"
+mvn  org.codehaus.mojo:versions-maven-plugin:2.11.0:set -DgenerateBackupPoms=false -DnewVersion=$VERSION || echo "  versions:set $VERSION  ==> exit code $?"
 mvn clean install
 git commit -am "Prépare Release version $VERSION"
 
@@ -23,10 +23,10 @@ git checkout ${BRANCH_NAME}
 git branch -D prepare-release
 
 # Not work pour 0-M3
-echo "5- Merge with 'master'"
+echo "5- Merge with '${BRANCH_NAME}'"
 git merge ossrh-$VERSION
 
-echo "6- Increment Version 'master'"
-mvn org.codehaus.mojo:versions-maven-plugin:2.10.0:set -DgenerateBackupPoms=false -DnextSnapshot=true || echo "  versions:set $VERSION  ==> exit code $?"
+echo "6- Increment Version '${BRANCH_NAME}'"
+mvn org.codehaus.mojo:versions-maven-plugin:2.11.0:set -DgenerateBackupPoms=false -DnextSnapshot=true || echo "  versions:set $VERSION  ==> exit code $?"
 git commit -am "Prepare Next Snapshot"
 git push origin ${BRANCH_NAME}
