@@ -16,7 +16,7 @@ POM Parent Agrica  [![Build Status](https://travis-ci.com/agrica/ppa.svg?branch=
 ```
 mvn dependency:resolve-plugins
 ```
-
+Montre les mise à jours de plugins possible
 ```
 mvn versions:display-plugin-updates
 ```
