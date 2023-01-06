@@ -100,7 +100,7 @@
         <phpbuild.php.bin>${env.PHP73_BINDIR}/php</phpbuild.php.bin>
 
         <!-- PHP Code Sniffer -->
-        <codesniffer.version>3.6.2</codesniffer.version>
+        <codesniffer.version>3.7.1</codesniffer.version>
         <phpbuild.codesniffer.version>${codesniffer.version}</phpbuild.codesniffer.version>
         <phpbuild.codesniffer.bin.dir>${project.build.directory}/phpbuild-codesniffer-bin</phpbuild.codesniffer.bin.dir>
         <phpbuild.codesniffer.phpcs.bin>${phpbuild.codesniffer.bin.dir}/codesniffer-${phpbuild.codesniffer.version}-phpcs.phar</phpbuild.codesniffer.phpcs.bin>
@@ -121,9 +121,12 @@
         <!-- Php Unit -->
         <phpunit.bin>./vendor/phpunit/phpunit/phpunit</phpunit.bin>
         <phpunit.tests.reportPath>${project.build.directory}/phpunit-junit.xml</phpunit.tests.reportPath>
+        <phpunit.tests.reportDocxHtml>${project.build.directory}/phpunit-docx.html</phpunit.tests.reportDocxHtml>
+        <phpunit.tests.reportDocxText>${project.build.directory}/phpunit-docx.txt</phpunit.tests.reportDocxText>
         <phpunit.coverage.reportPath>${project.build.directory}/phpunit-coverage.xml</phpunit.coverage.reportPath>
         <phpunit.coverage.reportHtmlPath>${project.build.directory}/phpunit-coverage-html</phpunit.coverage.reportHtmlPath>
-
+        <phpunit.default.opts>--coverage-html=${phpunit.coverage.reportHtmlPath} --testdox-html ${phpunit.tests.reportDocxHtml} --testdox-text ${phpunit.tests.reportDocxText}</phpunit.default.opts>
+        <phpunit.opts>${phpunit.default.opts}</phpunit.opts>
         <!-- ================================= -->
         <!-- Build JOB configuration           -->
         <!-- ================================= -->
@@ -239,6 +242,7 @@
 
 
     <build>
+
         <pluginManagement>
             <!-- Versions of plugins to use, to be sure that a new release automatically installed will not break an existing build -->
             <plugins>
@@ -999,7 +1003,7 @@ Changelog of Git Changelog Maven plugin.
                                     <skip>${phpunit.test.skip}</skip>
                                     <executable>${phpbin}</executable>
                                     <workingDirectory>${project.basedir}/${project.php.dir}</workingDirectory>
-                                    <commandlineArgs>${phpunit.bin} -c phpunit.xml --log-junit ${phpunit.tests.reportPath} --coverage-clover=${phpunit.coverage.reportPath}  --coverage-html=${phpunit.coverage.reportHtmlPath}</commandlineArgs>
+                                    <commandlineArgs>${phpunit.bin} -c phpunit.xml --log-junit ${phpunit.tests.reportPath}  --coverage-clover=${phpunit.coverage.reportPath} ${phpunit.opts} </commandlineArgs>
                                     <environmentVariables>
                                         <PHP_HOME>${php.home}</PHP_HOME>
                                         <PHP_BIN>${phpbin}</PHP_BIN>
