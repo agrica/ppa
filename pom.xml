@@ -216,7 +216,7 @@
         <versions-maven-plugin.version>2.11.0</versions-maven-plugin.version>
 
         <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
-        <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version> <!-- 3.0.0 -->
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version> <!-- 3.3.0, Bug in 3.4.2 for PHP -->
         <iterator-maven-plugin.version>0.5.1</iterator-maven-plugin.version>
         <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version> <!-- 1.12 -->
 
