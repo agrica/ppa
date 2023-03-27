@@ -57,12 +57,20 @@
         <system>JIRA</system>
         <url>${usine.url.bugtracker.jira}/PPG</url>
     </issueManagement>
-
+<!--
     <scm>
         <connection>scm:git:https://github.com/agrica/ppa.git</connection>
         <url>https://github.com/agrica/ppa</url>
         <tag>HEAD</tag>
     </scm>
+-->
+    <scm>
+        <connection>scm:git:ssh://gitlab-dei.agrica.loc:socle/ppa.git</connection>
+        <developerConnection>scm:git:git@gitlab-dei.agrica.loc:socle/ppa.git</developerConnection>
+        <url>http://gitlab-dei.agrica.loc/socle/ppa</url>
+        <tag>HEAD</tag>
+    </scm>
+
 
     <!-- A redefinir au besoin par les projets -->
     <properties>
